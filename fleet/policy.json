@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "recipe_revision": 1,
+  "recipe_revision": 2,
   "upstream_repository": "LyraVoid/FinaSU",
   "channel": "release",
   "retry_hours": 6,

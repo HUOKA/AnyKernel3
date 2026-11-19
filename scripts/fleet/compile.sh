@@ -5,8 +5,13 @@ OUT="$KERNEL_ROOT/fleet-out"
 mkdir -p "$OUT" "$GITHUB_WORKSPACE/fleet-evidence" "$KERNEL_ROOT/fleet-dist"
 
 CLANG_VERSION=$(sed -n 's/^CLANG_VERSION=//p' common/build.config.constants | tr -d '"')
-CLANG_BIN="$KERNEL_ROOT/prebuilts/clang/host/linux-x86/$CLANG_VERSION/bin"
-test -x "$CLANG_BIN/clang"
+CLANG_BIN="$KERNEL_ROOT/prebuilts/clang/host/linux-x86/clang-$CLANG_VERSION/bin"
+if [ ! -x "$CLANG_BIN/clang" ]; then
+  echo "::error::Recorded toolchain is missing: $CLANG_BIN/clang"
+  ls "$KERNEL_ROOT/prebuilts/clang/host/linux-x86"
+  exit 1
+fi
+echo "Using exact source toolchain: $CLANG_BIN"
 export PATH="$CLANG_BIN:/usr/bin:/bin:$PATH"
 export ARCH=arm64 LLVM=1 LLVM_IAS=1
 export CROSS_COMPILE=aarch64-linux-gnu-

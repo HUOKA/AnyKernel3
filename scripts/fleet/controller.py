@@ -120,7 +120,8 @@ def plan(args):
     release = resolve_release(policy["upstream_repository"])
     state, _ = read_state(args.repository)
     selected, notes = select_targets(targets, policy, release, state, only=args.only, force=args.force)
-    plan_data = {"schema": 1, "release": release, "policy": policy, "targets": selected, "notes": notes}
+    plan_data = {"schema": 1, "release": release, "policy": policy, "targets": selected, "notes": notes,
+                 "catalog_fingerprint": digest({"targets": targets, "policy": policy, "release": release})}
     Path("fleet-plan.json").write_text(json.dumps(plan_data, indent=2) + "\n")
     matrix = {"include": [{"id": t["id"], "android": t["android"], "series": t["series"],
                             "sublevel": t["sublevel"], "patch_level": t["patch_level"],
@@ -161,7 +162,7 @@ def finish(args):
             successful.append(target)
         lines.append(f"| {target['id']} | {result['status']} |")
     if successful:
-        tag = "finasu-" + plan_data["release"]["tag"] + "-" + digest(plan_data["policy"])[:8]
+        tag = "finasu-" + plan_data["release"]["tag"] + "-" + plan_data["catalog_fingerprint"][:8]
         if gh("api", f"repos/{args.repository}/releases/tags/{tag}", optional=True) is None:
             notes = Path("release-notes.md")
             notes.write_text("FinaSU + SUSFS kernels built for registered kernel profiles.\n\n"
