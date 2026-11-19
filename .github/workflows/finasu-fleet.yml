@@ -2,7 +2,7 @@ name: FinaSU exact kernel fleet
 
 on:
   schedule:
-    - cron: '17,47 * * * *'
+    - cron: '13,43 * * * *'
   workflow_dispatch:
     inputs:
       targets:

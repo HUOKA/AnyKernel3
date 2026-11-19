@@ -6,7 +6,7 @@ profiles in `targets.json`. The inventory contains kernel facts only.
 ## Routine operation
 
 `FinaSU exact kernel fleet` checks the latest published, non-prerelease FinaSU
-release at minute 17 and 47 each hour. The workflow must remain on the default
+release at minute 13 and 43 each hour. The workflow must remain on the default
 branch. Each batch resolves the release commit and its official manager once;
 all target jobs use that same commit and manager certificate. SUSFS and patch
 dependencies are pinned by `policy.json`.
