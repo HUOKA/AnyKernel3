@@ -4,9 +4,9 @@
     "redmagic-515167": {
       "key": "f043018f38aeaf5dcfb1ed80a784ecc7c9ea9afbd18dcc84ffbaca4c7272442d",
       "status": "failure",
-      "updated_at": "2026-11-19T06:45:02.736262+00:00",
-      "attempts": 1,
-      "run_id": "44474205990",
+      "updated_at": "2026-11-19T06:54:56.633804+00:00",
+      "attempts": 2,
+      "run_id": "44474606564",
       "release": {
         "repository": "LyraVoid/FinaSU",
         "tag": "v1.6.4",
@@ -21,15 +21,15 @@
       "result": {
         "target": "redmagic-515167",
         "status": "failure",
-        "run_id": "44474205990"
+        "run_id": "44474606564"
       }
     },
     "k80-61138": {
       "key": "ae948b7fcc15b63cd2fa8c3897ff9d6d6f6b7460c1d33851d00dc890ab1610a9",
       "status": "failure",
-      "updated_at": "2026-11-19T06:45:02.736262+00:00",
-      "attempts": 1,
-      "run_id": "44474205990",
+      "updated_at": "2026-11-19T06:54:56.633804+00:00",
+      "attempts": 2,
+      "run_id": "44474606564",
       "release": {
         "repository": "LyraVoid/FinaSU",
         "tag": "v1.6.4",
@@ -44,15 +44,15 @@
       "result": {
         "target": "k80-61138",
         "status": "failure",
-        "run_id": "44474205990"
+        "run_id": "44474606564"
       }
     },
     "gki-6689": {
       "key": "53d5793163c1f24c330c6f8c62d43c0c68c7aa5f47d493766d7a8867db8963b0",
       "status": "failure",
-      "updated_at": "2026-11-19T06:45:02.736262+00:00",
-      "attempts": 1,
-      "run_id": "44474205990",
+      "updated_at": "2026-11-19T06:54:56.633804+00:00",
+      "attempts": 2,
+      "run_id": "44474606564",
       "release": {
         "repository": "LyraVoid/FinaSU",
         "tag": "v1.6.4",
@@ -67,15 +67,15 @@
       "result": {
         "target": "gki-6689",
         "status": "failure",
-        "run_id": "44474205990"
+        "run_id": "44474606564"
       }
     },
     "gki-6692": {
       "key": "5ebb4625506342f59ec2b411eb8a5dd660b3f393175b0671a7e7757d8f281346",
       "status": "failure",
-      "updated_at": "2026-11-19T06:45:02.736262+00:00",
-      "attempts": 1,
-      "run_id": "44474205990",
+      "updated_at": "2026-11-19T06:54:56.633804+00:00",
+      "attempts": 2,
+      "run_id": "44474606564",
       "release": {
         "repository": "LyraVoid/FinaSU",
         "tag": "v1.6.4",
@@ -90,15 +90,15 @@
       "result": {
         "target": "gki-6692",
         "status": "failure",
-        "run_id": "44474205990"
+        "run_id": "44474606564"
       }
     },
     "miro-6677": {
       "key": "73358bbdc9832c5efe7b786d833f51815def664dd9732776bea5fdf5f1a02460",
       "status": "failure",
-      "updated_at": "2026-11-19T06:45:02.736262+00:00",
-      "attempts": 1,
-      "run_id": "44474205990",
+      "updated_at": "2026-11-19T06:54:56.633804+00:00",
+      "attempts": 2,
+      "run_id": "44474606564",
       "release": {
         "repository": "LyraVoid/FinaSU",
         "tag": "v1.6.4",
@@ -111,16 +111,17 @@
         "published_at": "2026-11-17T13:12:06Z"
       },
       "result": {
+        "target": "miro-6677",
         "status": "failure",
-        "reason": "No successful result receipt"
+        "run_id": "44474606564"
       }
     },
     "op615-66118": {
       "key": "bf9456d947434f9549e86023fb8d712deefc10ecd3ccbd83123721877aedce29",
       "status": "failure",
-      "updated_at": "2026-11-19T06:45:02.736262+00:00",
-      "attempts": 1,
-      "run_id": "44474205990",
+      "updated_at": "2026-11-19T06:54:56.633804+00:00",
+      "attempts": 2,
+      "run_id": "44474606564",
       "release": {
         "repository": "LyraVoid/FinaSU",
         "tag": "v1.6.4",
@@ -133,16 +134,17 @@
         "published_at": "2026-11-17T13:12:06Z"
       },
       "result": {
+        "target": "op615-66118",
         "status": "failure",
-        "reason": "No successful result receipt"
+        "run_id": "44474606564"
       }
     },
     "opd2404-61118": {
       "key": "ec6470a1d92f773cd1f8de53be83b55104afa4327a21fb7e4c77d85011dc7c59",
       "status": "failure",
-      "updated_at": "2026-11-19T06:45:02.736262+00:00",
-      "attempts": 1,
-      "run_id": "44474205990",
+      "updated_at": "2026-11-19T06:54:56.633804+00:00",
+      "attempts": 2,
+      "run_id": "44474606564",
       "release": {
         "repository": "LyraVoid/FinaSU",
         "tag": "v1.6.4",
@@ -155,16 +157,17 @@
         "published_at": "2026-11-17T13:12:06Z"
       },
       "result": {
+        "target": "opd2404-61118",
         "status": "failure",
-        "reason": "No successful result receipt"
+        "run_id": "44474606564"
       }
     },
     "tb321fu-61124": {
       "key": "afb4b6c254d15033187d3458fce263ddd63dacdc11509084b9d98c78516414ed",
       "status": "failure",
-      "updated_at": "2026-11-19T06:45:02.736262+00:00",
-      "attempts": 1,
-      "run_id": "44474205990",
+      "updated_at": "2026-11-19T06:54:56.633804+00:00",
+      "attempts": 2,
+      "run_id": "44474606564",
       "release": {
         "repository": "LyraVoid/FinaSU",
         "tag": "v1.6.4",
@@ -184,9 +187,9 @@
     "tb710fu-61157": {
       "key": "b2a08cafab6f705ad89fba28b588a4c22710d139258da030a7ea9cee57eb9673",
       "status": "failure",
-      "updated_at": "2026-11-19T06:45:02.736262+00:00",
-      "attempts": 1,
-      "run_id": "44474205990",
+      "updated_at": "2026-11-19T06:54:56.633804+00:00",
+      "attempts": 2,
+      "run_id": "44474606564",
       "release": {
         "repository": "LyraVoid/FinaSU",
         "tag": "v1.6.4",
@@ -206,9 +209,9 @@
     "pkg110-61141": {
       "key": "b060a33b1770548c6cf6aac9cb1ec56c1792f8839985499e2deff5b3e6877ea5",
       "status": "failure",
-      "updated_at": "2026-11-19T06:45:02.736262+00:00",
-      "attempts": 1,
-      "run_id": "44474205990",
+      "updated_at": "2026-11-19T06:54:56.633804+00:00",
+      "attempts": 2,
+      "run_id": "44474606564",
       "release": {
         "repository": "LyraVoid/FinaSU",
         "tag": "v1.6.4",
@@ -228,9 +231,9 @@
     "turner-66118-abogki519650608": {
       "key": "b08ef4a7daaeae4c57c5182dfb5dc552d9ac0acbaf3f7d595125ebea3dd4a35a",
       "status": "failure",
-      "updated_at": "2026-11-19T06:45:02.736262+00:00",
-      "attempts": 1,
-      "run_id": "44474205990",
+      "updated_at": "2026-11-19T06:54:56.633804+00:00",
+      "attempts": 2,
+      "run_id": "44474606564",
       "release": {
         "repository": "LyraVoid/FinaSU",
         "tag": "v1.6.4",
@@ -248,5 +251,5 @@
       }
     }
   },
-  "updated_at": "2026-11-19T06:45:02.736262+00:00"
+  "updated_at": "2026-11-19T06:54:56.633804+00:00"
 }
