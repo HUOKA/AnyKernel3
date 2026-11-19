@@ -17,11 +17,22 @@ list and a force switch. Matrix jobs run independently, at most four at once.
 State is stored in `state.json` on the `finasu-build-state` branch. Scheduled
 runs share a concurrency group and do not cancel an active build.
 
-Validated packages and manager APKs are retained as a GitHub prerelease.
+Validated packages and the matching official manager APK are published in one
+normal GitHub Release, marked Latest. Titles follow upstream's
+`GKI Kernel: FinaSU <build> + SUSFS <version>` convention; tags use `v2.4.0-rN`.
+Kernel ZIPs use `FinaSU-<build>-android14-6.1-138-AnyKernel3.zip` style names.
+When multiple profiles share an Android/kernel version, the exact kernel
+release suffix distinguishes them. The release body maps full versions to ZIPs.
+Only kernel ZIPs and the APK are release assets. Retries append successful
+targets to the same release, preserving the existing packages and download table.
 Detailed logs, configurations, symbol tables and receipts are Actions artifacts.
 Only a target that passed compilation, full release-string validation, requested
 configuration validation and baseline symbol-CRC comparison is published.
 Successful static validation does not record a phone boot test.
+
+Manual dispatch with `publish_only=true` restores successful Actions artifacts
+and republishes them without recompiling or changing build attempt counters.
+This requires the saved build artifacts to still be available.
 
 ## Fixed options
 

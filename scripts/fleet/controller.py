@@ -9,6 +9,9 @@ from pathlib import Path
 import re
 import subprocess
 import sys
+import tempfile
+
+import publisher
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -162,29 +165,50 @@ def finish(args):
             successful.append(target)
         lines.append(f"| {target['id']} | {result['status']} |")
     if successful:
-        tag = "finasu-" + plan_data["release"]["tag"] + "-" + plan_data["catalog_fingerprint"][:8]
-        if gh("api", f"repos/{args.repository}/releases/tags/{tag}", optional=True) is None:
-            notes = Path("release-notes.md")
-            notes.write_text("FinaSU + SUSFS kernels built for registered kernel profiles.\n\n"
-                             "Build and static configuration validation completed for uploaded packages. Device boot acceptance is separate.\n\n"
-                             + "\n".join(lines) + "\n")
-            subprocess.run(["gh", "release", "create", tag, "-R", args.repository, "--target", os.environ["GITHUB_SHA"],
-                            "--title", f"FinaSU {plan_data['release']['tag']} exact kernels", "--prerelease",
-                            "--notes-file", str(notes)], check=True)
-        assets = []
-        for target in successful:
-            assets += [str(p) for p in Path(args.packages).rglob(f"*{target['id']}*") if p.is_file()]
-        assets += [str(p) for p in Path(args.manager).rglob("*.apk")]
-        if assets:
-            subprocess.run(["gh", "release", "upload", tag, "-R", args.repository, "--clobber", *assets], check=True)
-        for target in successful:
-            state["targets"][target["id"]]["published_tag"] = tag
+        publication = publisher.publish(args.repository, os.environ["GITHUB_SHA"],
+            load_json(ROOT / "fleet/targets.json")["targets"], plan_data["policy"], plan_data["release"],
+            state, args.packages, args.manager, gh, target_key)
+        lines += ["", f"Release: {publication['url']}"]
     state["updated_at"] = now
     write_state(args.repository, state)
     summary = "\n".join(lines) + "\n"
     Path("fleet-summary.md").write_text(summary)
     if os.environ.get("GITHUB_STEP_SUMMARY"):
         with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as stream:
+            stream.write(summary)
+    print(summary)
+
+
+def republish(args):
+    """Restore successful run artifacts and republish them without recompiling."""
+    policy = load_json(ROOT / "fleet/policy.json")
+    catalog = load_json(ROOT / "fleet/targets.json")["targets"]
+    release = resolve_release(policy["upstream_repository"])
+    state, _ = read_state(args.repository)
+    targets = publisher.matching_targets(catalog, policy, release, state, target_key)
+    if not targets:
+        raise ValueError("No successful saved builds match the selected FinaSU release")
+    grouped = {}
+    for target in targets:
+        record = state["targets"][target["id"]]
+        grouped.setdefault(record["run_id"], []).append("fleet-package-" + target["id"])
+    with tempfile.TemporaryDirectory(prefix="finasu-republish-") as folder:
+        packages, manager = Path(folder) / "packages", Path(folder) / "manager"
+        for run_id, artifacts in grouped.items():
+            command = ["gh", "run", "download", run_id, "-R", args.repository,
+                       "--dir", str(packages / run_id)]
+            for name in artifacts:
+                command += ["--name", name]
+            subprocess.run(command, check=True)
+        subprocess.run(["gh", "run", "download", next(iter(grouped)), "-R", args.repository,
+                        "--name", "fleet-manager", "--dir", str(manager)], check=True)
+        publication = publisher.publish(args.repository, os.environ["GITHUB_SHA"], catalog,
+            policy, release, state, packages, manager, gh, target_key)
+    write_state(args.repository, state)
+    summary = f"Published {publication['targets']} validated kernel ZIPs and the official APK: {publication['url']}\n"
+    Path("fleet-summary.md").write_text(summary, encoding="utf-8")
+    if os.environ.get("GITHUB_STEP_SUMMARY"):
+        with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as stream:
             stream.write(summary)
     print(summary)
 
@@ -203,5 +227,8 @@ if __name__ == "__main__":
     p.add_argument("--packages", default="fleet-packages")
     p.add_argument("--manager", default="fleet-manager")
     p.set_defaults(func=finish)
+    p = sub.add_parser("republish")
+    p.add_argument("--repository", required=True)
+    p.set_defaults(func=republish)
     args = parser.parse_args()
     args.func(args)

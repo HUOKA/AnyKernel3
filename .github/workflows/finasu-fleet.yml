@@ -13,6 +13,10 @@ on:
         description: 'Rebuild even when the same inputs already succeeded or retry limit was reached'
         type: boolean
         default: false
+      publish_only:
+        description: 'Republish existing validated kernels and the official APK without recompiling'
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -24,6 +28,7 @@ concurrency:
 
 jobs:
   plan:
+    if: inputs.publish_only != true
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     outputs:
@@ -120,3 +125,18 @@ jobs:
           name: fleet-summary
           path: fleet-summary.md
           if-no-files-found: ignore
+
+  republish:
+    if: inputs.publish_only == true
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - name: Publish existing validated kernel ZIPs and matched manager
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/fleet/controller.py republish --repository "$GITHUB_REPOSITORY"
+      - uses: actions/upload-artifact@v6
+        with:
+          name: fleet-summary
+          path: fleet-summary.md
