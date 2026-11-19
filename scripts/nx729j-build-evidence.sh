@@ -25,14 +25,14 @@ for setting in \
   CONFIG_KSU_SUSFS=y \
   CONFIG_LTO_CLANG_THIN=y \
   CONFIG_ZRAM=y \
-  CONFIG_ZRAM_DEF_COMP_LZ4KD=y \
+  CONFIG_CRYPTO_LZ4KD=y \
   CONFIG_BBG=y \
   CONFIG_IP_SET=y \
   CONFIG_NET_SCH_FQ=y \
   CONFIG_CIFS=y; do
   grep -qxF "$setting" "$evidence/kernel.config" || { echo "::error::Missing requested configuration: $setting"; exit 1; }
 done
-grep -Eq '^CONFIG_TCP_CONG_BBR3?=y$' "$evidence/kernel.config"
+grep -qxF 'CONFIG_TCP_CONG_BBR3=y' "$evidence/kernel.config"
 if grep -Eq '^CONFIG_(KPM|REKERNEL|NOMOUNT)=y$' "$evidence/kernel.config"; then
   echo '::error::An unrequested optional feature is enabled'
   exit 1
@@ -42,5 +42,5 @@ test "$(git -C "$KERNEL_ROOT/common" rev-parse HEAD)" = bfd2ab010d7b36dd75373191
 test "$(git -C "$SUSFS4KSU" rev-parse HEAD)" = c1d1da42b74771944207ec45aaceff9c57e84985
 
 sha256sum "$output/dist/Image" "$output/dist/Image.lz4" > "$evidence/kernel-sha256.txt"
-grep -E '^(CONFIG_(ARM64_4K_PAGES|KSU|LTO|ZRAM|BBG|IP_SET|NET_SCH_FQ|CIFS|TCP_CONG_BBR|KPM|REKERNEL|NOMOUNT)|# CONFIG_(KPM|REKERNEL|NOMOUNT))' "$evidence/kernel.config" > "$evidence/config-summary.txt"
+grep -E '^(CONFIG_(ARM64_4K_PAGES|KSU|LTO|ZRAM|CRYPTO_LZ4KD|BBG|IP_SET|NET_SCH_FQ|CIFS|TCP_CONG_BBR|KPM|REKERNEL|NOMOUNT)|# CONFIG_(KPM|REKERNEL|NOMOUNT))' "$evidence/kernel.config" > "$evidence/config-summary.txt"
 printf 'All requested kernel configuration checks passed.\n' | tee "$evidence/validation.txt"

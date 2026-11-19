@@ -1969,6 +1969,8 @@ jobs:
           compression-level: 9
 
       - name: Verify NX729J configuration and collect build evidence
+        id: nx729j_verify
+        continue-on-error: true
         if: inputs.android_version == 'android13' && inputs.kernel_version == '5.15' && inputs.sub_level == '167' && inputs.ksu_variant == 'BakaSU'
         run: bash scripts/nx729j-build-evidence.sh
 
@@ -2113,3 +2115,9 @@ jobs:
           path: patch-rejects/
           if-no-files-found: ignore
           compression-level: 9
+
+      - name: Enforce NX729J configuration validation
+        if: always() && steps.nx729j_verify.outcome == 'failure'
+        run: |
+          echo '::error::NX729J configuration validation failed; compiled outputs were preserved for diagnosis.'
+          exit 1
