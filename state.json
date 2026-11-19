@@ -39,7 +39,9 @@
         "runtime_acceptance": "not performed",
         "run_id": "44475571581"
       },
-      "published_tag": "finasu-v1.6.4-d5c97106"
+      "published_tag": "v2.4.0-r1",
+      "asset_name": "FinaSU-33211-android13-5.15-167-AnyKernel3.zip",
+      "package_sha256": "78984af1add35751e3e53349bd6760fe151eaebba3874b8982bfe63d3572b895"
     },
     "k80-61138": {
       "key": "fbcaec4bdf3acae7c84a7da6927d841cfd9c6769a5ad8764b18d7ffc0f3e066c",
@@ -79,7 +81,9 @@
         "runtime_acceptance": "not performed",
         "run_id": "44475571581"
       },
-      "published_tag": "finasu-v1.6.4-d5c97106"
+      "published_tag": "v2.4.0-r1",
+      "asset_name": "FinaSU-33211-android14-6.1-138-AnyKernel3.zip",
+      "package_sha256": "632b775dccb645c2e47fd0ad756f13930ae7ecc0b3a927745b95b981cc3b5236"
     },
     "gki-6689": {
       "key": "67d8956381d37299649fd929620c076fc95d24a82f8dae9a4a185f1915940657",
@@ -119,7 +123,9 @@
         "runtime_acceptance": "not performed",
         "run_id": "44486064335"
       },
-      "published_tag": "finasu-v1.6.4-987d6e11"
+      "published_tag": "v2.4.0-r1",
+      "asset_name": "FinaSU-33211-android15-6.6-89-AnyKernel3.zip",
+      "package_sha256": "abb67ee2be840052cb131dc0241f3cce1e35c46806af44e8ed671f6748ca4712"
     },
     "gki-6692": {
       "key": "4996dce5bd9de6931a5f9200cfb1f7d92945ca1fd4a11d71e76e926ee7f88f14",
@@ -159,7 +165,9 @@
         "runtime_acceptance": "not performed",
         "run_id": "44486064335"
       },
-      "published_tag": "finasu-v1.6.4-987d6e11"
+      "published_tag": "v2.4.0-r1",
+      "asset_name": "FinaSU-33211-android15-6.6-92-AnyKernel3.zip",
+      "package_sha256": "66bbcbd316ef91116d0faf3d211d059e3e3957f08e7499434abb633f2579d79e"
     },
     "miro-6677": {
       "key": "c22d2b5c527dac887135e25dfb3915c16fbe022d8ca799061a6ce00454ad9a5f",
@@ -199,7 +207,9 @@
         "runtime_acceptance": "not performed",
         "run_id": "44486064335"
       },
-      "published_tag": "finasu-v1.6.4-987d6e11"
+      "published_tag": "v2.4.0-r1",
+      "asset_name": "FinaSU-33211-android15-6.6-77-AnyKernel3.zip",
+      "package_sha256": "7501e9e5a4f45f221da6018daceaf7608a7e4d01c92422b91825c5aa88325867"
     },
     "op615-66118": {
       "key": "742feee73a4cb579b21b6822d56723fc531d57316846ff2d2b7f49ae9bac6c04",
@@ -239,7 +249,9 @@
         "runtime_acceptance": "not performed",
         "run_id": "44486064335"
       },
-      "published_tag": "finasu-v1.6.4-987d6e11"
+      "published_tag": "v2.4.0-r1",
+      "asset_name": "FinaSU-33211-android15-6.6-118-8-g2e6b9c3812c5-ab15114928-4k-AnyKernel3.zip",
+      "package_sha256": "dd107eb14ee328888c79c6f485a0a5db6b6f116fa1699aab1c545b7da876b96e"
     },
     "opd2404-61118": {
       "key": "8c674483333ab32e7e6c4b6430983d04a145cfc27cc03c4d77bde6021c282676",
@@ -279,7 +291,9 @@
         "runtime_acceptance": "not performed",
         "run_id": "44486064335"
       },
-      "published_tag": "finasu-v1.6.4-987d6e11"
+      "published_tag": "v2.4.0-r1",
+      "asset_name": "FinaSU-33211-android14-6.1-118-AnyKernel3.zip",
+      "package_sha256": "0c1a9a996ccbe61bafcfa5cc292979310a67f9efdb6ffe6f82bf7706b41dcb8a"
     },
     "tb321fu-61124": {
       "key": "13952d3acfa387938464a69a80a896577d9a7e61cfb79b7c17a3918a30512d4d",
@@ -319,7 +333,9 @@
         "runtime_acceptance": "not performed",
         "run_id": "44486064335"
       },
-      "published_tag": "finasu-v1.6.4-987d6e11"
+      "published_tag": "v2.4.0-r1",
+      "asset_name": "FinaSU-33211-android14-6.1-124-AnyKernel3.zip",
+      "package_sha256": "d7594722d88a53b575833689576e59d5c1da4f8e8adc1b547d75e442bd6034ea"
     },
     "tb710fu-61157": {
       "key": "65a58d25f144e53b6425ef2e35622c947eabe1ffabb06cfa6e1ee9f1eb7bd142",
@@ -359,7 +375,9 @@
         "runtime_acceptance": "not performed",
         "run_id": "44486064335"
       },
-      "published_tag": "finasu-v1.6.4-987d6e11"
+      "published_tag": "v2.4.0-r1",
+      "asset_name": "FinaSU-33211-android14-6.1-157-AnyKernel3.zip",
+      "package_sha256": "9cfcd45720e3e521aed5a35f3f6c2e1ecaeeb89dbcc6e59dca95fbb808521108"
     },
     "pkg110-61141": {
       "key": "0801ecd05ffa795509345ab0e318db8e5e7132758b61daadaff0db69cc6bfa76",
@@ -399,7 +417,9 @@
         "runtime_acceptance": "not performed",
         "run_id": "44486064335"
       },
-      "published_tag": "finasu-v1.6.4-987d6e11"
+      "published_tag": "v2.4.0-r1",
+      "asset_name": "FinaSU-33211-android14-6.1-141-AnyKernel3.zip",
+      "package_sha256": "d68cba9d69962b9492bdc22643f2695e4131dd96ac92487348d744f126dffb86"
     },
     "turner-66118-abogki519650608": {
       "key": "f9f4a6e20c975e3d5a6f065bced506b480da53186cfeccc9ea8f4ef05cad2e4a",
@@ -439,8 +459,16 @@
         "runtime_acceptance": "not performed",
         "run_id": "44486064335"
       },
-      "published_tag": "finasu-v1.6.4-987d6e11"
+      "published_tag": "v2.4.0-r1",
+      "asset_name": "FinaSU-33211-android15-6.6-118-8-gc44b714366cc-abogki519650608-4k-AnyKernel3.zip",
+      "package_sha256": "143bfc7198184cac6b0b7d5c577c30ec42d06b5dc9a77f7495272e39d6bfc4ec"
     }
   },
-  "updated_at": "2026-11-19T09:44:30.529587+00:00"
+  "updated_at": "2026-11-19T09:44:30.529587+00:00",
+  "publications": {
+    "5d0e4bbfbbeb8439d06448078c11009bc4e359bcaf66528eefcfc07ed2f6ac6e": {
+      "tag": "v2.4.0-r1",
+      "release_id": 451164020
+    }
+  }
 }
