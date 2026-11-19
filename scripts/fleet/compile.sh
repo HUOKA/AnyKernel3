@@ -31,7 +31,7 @@ text=text.replace('#define LZ4LIB_VISIBILITY __attribute__((visibility("default"
                   '#define LZ4LIB_VISIBILITY /* kernel EXPORT_SYMBOL owns visibility */')
 p.write_text(text)
 if Path('common/fs/f2fs/lz4armv8/lz4accel.h').exists():
-    names=['lz4_decompress_accel_enable','lz4_decompress_asm','lz4_decompress_asm_fn',
+    names=['lz4_decompress_accel_enable','lz4_decompress_asm','lz4_decompress_asm_fn','lz4_decompress_asm_select',
            '_lz4_decompress_asm','_lz4_decompress_asm_noprfm',
            '__cfi_lz4_decompress_asm','__cfi_lz4_decompress_asm_noprfm']
     for file in Path('common/lib/lz4').rglob('*'):
