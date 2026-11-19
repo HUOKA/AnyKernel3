@@ -705,7 +705,7 @@ if [[ "$ANDROID_VERSION" == "android14" && "$KERNEL_VERSION" == "6.1" ]]; then
     echo "还原 Android 14 6.1 base.c 临时调整"
     sed -i '/^#include <linux\/dma-buf.h>$/d' fs/proc/base.c
   fi
-  if [[ "$CURRENT_SUB" -ge 157 ]] && ! grep -qF '#include <trace/hooks/blk.h>' fs/namespace.c; then
+  if [[ "$CURRENT_SUB" -ge 157 && -f include/trace/hooks/blk.h ]] && ! grep -qF '#include <trace/hooks/blk.h>' fs/namespace.c; then
     echo "还原 Android 14 6.1 namespace.c 临时调整"
     sed -i '/^#include "internal.h"$/a #include <trace/hooks/blk.h>' fs/namespace.c
   fi

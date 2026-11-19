@@ -48,6 +48,16 @@ requested feature patches, and uses native Kbuild with the saved configuration.
 Source commits differing from the original kernel banner are explicitly marked
 as recorded vendor/reference sources and must pass the target symbol baseline.
 
+Some module-build caches reuse a symbol table from a newer compatible GKI.
+Such a table can contain exports that never existed in the target kernel.
+`source.abi_reference` records independently extracted original-kernel export
+CRCs, the complete release, official boot URL and archive/Image hashes where
+this was found. `export_wsl.py` preserves these reviewed baselines. The local
+`extract_stock_abi.py` tool reads the original Image's export and CRC tables;
+the candidate build is never used to generate its own acceptance baseline.
+These references cover all exports in the replaced vmlinux. Separate stock
+modules are not replaced by the AnyKernel3 package.
+
 `opd2508-66118-ref` is recorded but disabled because the available saved source
 is a different build and its target config is missing. It is shown as
 `source-pending` in every selection summary.

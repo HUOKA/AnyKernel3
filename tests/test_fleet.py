@@ -3,6 +3,7 @@ from datetime import datetime, timezone, timedelta
 import importlib.util
 import json
 from pathlib import Path
+import tempfile
 import unittest
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -15,6 +16,7 @@ def load(name):
 
 
 controller=load('controller');verify=load('verify')
+exporter=load('export_wsl')
 
 
 class PlannerTests(unittest.TestCase):
@@ -69,6 +71,32 @@ class ManifestTests(unittest.TestCase):
             self.assertRegex(t['source']['commit'],r'^[a-f0-9]{40}$')
             for patch in t['source'].get('patches',[]):
                 self.assertEqual(hashlib.sha256((ROOT/patch['path']).read_bytes()).hexdigest(),patch['sha256'])
+            reference=t['source'].get('abi_reference')
+            if reference:
+                self.assertEqual(reference['release'],t['release'])
+                self.assertEqual(reference['sha256'],t['symvers_sha256'])
+                self.assertEqual(reference['symbols'],len(verify.symvers(ROOT/t['symvers'])))
+
+    def test_inventory_export_preserves_reviewed_stock_baseline(self):
+        import hashlib
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder)
+            (root/'fleet/abi').mkdir(parents=True)
+            (root/'data/android14').mkdir(parents=True)
+            (root/'prepared').mkdir()
+            release='6.1.124-android14-11-gd53339245194-ab13005711'
+            stock=b'0x12345678\tstock_export\tvmlinux\tEXPORT_SYMBOL\n'
+            (root/'fleet/abi/target.symvers').write_bytes(stock)
+            (root/'prepared/.config').write_text('CONFIG_ARM64=y\n')
+            (root/'prepared/Module.symvers').write_text('0x99999999 newer_export vmlinux EXPORT_SYMBOL\n')
+            (root/'data/android14/6.1.json').write_text(json.dumps({'entries':[{'kernel':'6.1.124','date':'2025-02'}]}))
+            reference={'release':release,'path':'fleet/abi/target.symvers','sha256':hashlib.sha256(stock).hexdigest()}
+            (root/'fleet/source-overrides.json').write_text(json.dumps({'target':{'abi_reference':reference}}))
+            (root/'index.json').write_text(json.dumps({'entries':[{'id':'target','kernel_release':release,
+                'page_size':4096,'kernel_out':str(root/'prepared')}]}))
+            target=exporter.export(root/'index.json',root)[0]
+            self.assertEqual((root/target['symvers']).read_bytes(),stock)
+            self.assertEqual(target['symvers_sha256'],reference['sha256'])
 
     def test_inline_required_independently_from_susfs(self):
         config='CONFIG_KSU=y\nCONFIG_KSU_SUSFS=y\nCONFIG_KSU_HOOK_TRACEPOINT=y\n'

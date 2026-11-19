@@ -47,7 +47,15 @@ def export(index_path, root=ROOT):
             config_path.parent.mkdir(parents=True, exist_ok=True)
             abi_path.parent.mkdir(parents=True, exist_ok=True)
             config_path.write_text(config)
-            abi = (prepared / "Module.symvers").read_bytes()
+            # Module-build caches may reuse a compatible newer symbol table.
+            # A reviewed full-kernel reference takes precedence over that cache.
+            reference = source.get("abi_reference")
+            if reference:
+                assert reference["release"] == release
+                abi = (root / reference["path"]).read_bytes()
+                assert hashlib.sha256(abi).hexdigest() == reference["sha256"]
+            else:
+                abi = (prepared / "Module.symvers").read_bytes()
             abi_path.write_bytes(abi)
             target.update(config=str(config_path.relative_to(root)),
                           config_sha256=hashlib.sha256(config_path.read_bytes()).hexdigest(),

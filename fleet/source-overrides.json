@@ -19,14 +19,18 @@
     "url": "https://android.googlesource.com/kernel/common",
     "commit": "3637f4904cf55eb3e7eccb9d747d754a4e199740",
     "relation": "release-commit",
-    "compatibility_revision": 2,
-    "patches": [
-      {
-        "path": "fleet/patches/gki-6692-export-backports.patch",
-        "sha256": "a489d12cfcdaacf8743a50055d0d773f72bbc58c6ed64e253738b0eb258fb536",
-        "origin": "AOSP f6d915c22798c46f62ff2e62dd0af3ff5e7396c3: f2fs pin-file hook, vm_normal_folio_pmd export, l2tp put API bodies; keeps existing ABI entrypoints"
-      }
-    ]
+    "compatibility_revision": 3,
+    "abi_reference": {
+      "kind": "official-boot-vmlinux",
+      "release": "6.6.92-android15-8-g3637f4904cf5-ab13944661-4k",
+      "path": "fleet/abi/gki-6692.symvers",
+      "sha256": "5a51334b3ffd1558b2319c6a105af72f60182b191f3548213fa7440fd250c484",
+      "symbols": 8803,
+      "archive_url": "https://dl.google.com/android/gki/gki-certified-boot-android15-6.6-2025-07_r10.zip",
+      "archive_sha256": "0164c85c754a096c56d2f3bcb3b05a8809564927e420af2fa7f7c07046666ece",
+      "image_sha256": "11bf8868967b8f1657f9364afd48e0be2a351736485994fb5efae21aef595896",
+      "scope": "All exported symbols in the original vmlinux; separate stock modules are unchanged."
+    }
   },
   "miro-6677": {
     "url": "https://android.googlesource.com/kernel/common",
@@ -60,12 +64,36 @@
   "tb321fu-61124": {
     "url": "https://android.googlesource.com/kernel/common",
     "commit": "d533392451941315131f1ecddcea958e11ec6b98",
-    "relation": "release-commit"
+    "relation": "release-commit",
+    "abi_reference": {
+      "kind": "official-boot-vmlinux",
+      "release": "6.1.124-android14-11-gd53339245194-ab13005711",
+      "path": "fleet/abi/tb321fu-61124.symvers",
+      "sha256": "03c5082e61d2cf9ed08c65c73b2bbc2a3fd828f47e24dc5f75d8c5ee7ae41693",
+      "symbols": 8046,
+      "archive_url": "https://dl.google.com/android/gki/gki-certified-boot-android14-6.1-2025-02_r1.zip",
+      "archive_sha256": "be85fa34489a9036b97d52b3dada6c9785992b25d6e87d033ba4e78c3952929d",
+      "image_sha256": "b104f5388c5940408c085b03f45a966e0ab8eef110ef17b30a06c53cee06e5f2",
+      "scope": "All exported symbols in the original vmlinux; separate stock modules are unchanged."
+    },
+    "compatibility_revision": 1
   },
   "tb710fu-61157": {
     "url": "https://android.googlesource.com/kernel/common",
     "commit": "82d681c9b06bb8fb2cec58f7b2ae05644e6372f1",
-    "relation": "release-commit"
+    "relation": "release-commit",
+    "compatibility_revision": 1,
+    "abi_reference": {
+      "kind": "official-boot-vmlinux",
+      "release": "6.1.157-android14-11-g82d681c9b06b-ab14634535",
+      "path": "fleet/abi/tb710fu-61157.symvers",
+      "sha256": "697edf1caa2071abb1169c7b0605f78d00317054f6c21f1b036416a225705187",
+      "symbols": 8302,
+      "archive_url": "https://dl.google.com/android/gki/gki-certified-boot-android14-6.1-2025-12_r2.zip",
+      "archive_sha256": "cfc408c3ee81ffd1df5be993868af539e287b2d8e0ba5a7090ad8b1ea3aad764",
+      "image_sha256": "b344ddc133e77cb2924a5bdfac268509d542168c546b05c4443a23cceeea1a73",
+      "scope": "All exported symbols in the original vmlinux; separate stock modules are unchanged."
+    }
   },
   "pkg110-61141": {
     "url": "https://github.com/OnePlusOSS/android_kernel_common_oneplus_sm8650.git",
