@@ -164,19 +164,16 @@ jobs:
           echo "========================================"
 
       - name: 清理磁盘空间
-        uses: endersonmenezes/free-disk-space@v3
-        with:
-          remove_android: true
-          remove_dotnet: true
-          remove_haskell: true
-          remove_tool_cache: true
-          remove_swap: true
-          remove_packages: "azure-cli google-cloud-cli microsoft-edge-stable google-chrome-stable firefox postgresql* temurin-* *llvm* mysql* dotnet-sdk-*"
-          remove_packages_one_command: true
-          remove_folders: "/usr/share/swift /usr/share/miniconda /usr/share/az* /usr/local/lib/node_modules /usr/local/share/chromium /usr/local/share/powershell /usr/local/julia /usr/local/aws-cli /usr/local/aws-sam-cli /usr/share/gradle"
-          rm_cmd: "rmz"
-          rmz_version: "3.1.1"
-          testing: false
+        timeout-minutes: 4
+        run: |
+          df -h "$GITHUB_WORKSPACE"
+          # These are unused hosted-runner SDKs. Avoid the repeated apt removal
+          # passes that stalled the first NX729J run before source checkout.
+          sudo rm -rf -- /usr/local/lib/android /usr/share/dotnet /opt/ghc \
+            /usr/local/.ghcup /opt/hostedtoolcache /usr/share/swift
+          df -h "$GITHUB_WORKSPACE"
+          AVAILABLE_KB=$(df --output=avail "$GITHUB_WORKSPACE" | tail -1)
+          test "$AVAILABLE_KB" -ge 47185920
 
       - name: 检出代码仓库
         uses: actions/checkout@v7
