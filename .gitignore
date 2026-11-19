@@ -34,3 +34,15 @@ desktop.ini
 __pycache__/
 *.py[cod]
 *.pyo
+
+# Exact kernel workflow runtime outputs
+/fleet-plan.json
+/fleet-target.json
+/fleet-manager/
+/fleet-results/
+/fleet-result/
+/fleet-evidence/
+/fleet-packages/
+/fleet-package/
+/fleet-summary.md
+/release-notes.md

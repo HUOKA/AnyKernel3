@@ -7,6 +7,11 @@ permissions:
 on:
   workflow_call:
     inputs:
+      fleet_target:
+        description: "Registered exact kernel target; empty preserves the interactive workflow"
+        required: false
+        type: string
+        default: ""
       # ==================== 基础配置 ====================
       android_version:
         required: true
@@ -135,6 +140,8 @@ jobs:
       CCACHE_NOHASHDIR: "true"
       CCACHE_HARDLINK: "true"
       SKIP_INCOMPATIBLE: ${{ inputs.skip_incompatible }}
+      FLEET_TARGET: ${{ inputs.fleet_target }}
+      FLEET_KSU_COMMIT: ${{ inputs.ksu_commit }}
 
     steps:
       - name: 构建信息摘要
@@ -164,19 +171,13 @@ jobs:
           echo "========================================"
 
       - name: 清理磁盘空间
-        uses: endersonmenezes/free-disk-space@v3
-        with:
-          remove_android: true
-          remove_dotnet: true
-          remove_haskell: true
-          remove_tool_cache: true
-          remove_swap: true
-          remove_packages: "azure-cli google-cloud-cli microsoft-edge-stable google-chrome-stable firefox postgresql* temurin-* *llvm* mysql* dotnet-sdk-*"
-          remove_packages_one_command: true
-          remove_folders: "/usr/share/swift /usr/share/miniconda /usr/share/az* /usr/local/lib/node_modules /usr/local/share/chromium /usr/local/share/powershell /usr/local/julia /usr/local/aws-cli /usr/local/aws-sam-cli /usr/share/gradle"
-          rm_cmd: "rmz"
-          rmz_version: "3.1.1"
-          testing: false
+        timeout-minutes: 4
+        run: |
+          df -h "$GITHUB_WORKSPACE"
+          sudo rm -rf -- /usr/local/lib/android /usr/share/dotnet /opt/ghc \
+            /usr/local/.ghcup /opt/hostedtoolcache /usr/share/swift
+          df -h "$GITHUB_WORKSPACE"
+          test "$(df --output=avail "$GITHUB_WORKSPACE" | tail -1)" -ge 47185920
 
       - name: 检出代码仓库
         uses: actions/checkout@v7
@@ -240,7 +241,7 @@ jobs:
 
       # 仅 6.1+ 走 bazel 构建，持久化 --disk_cache 目录以加速后续构建
       - name: 恢复 bazel 磁盘缓存
-        if: inputs.android_version != 'android12' && inputs.android_version != 'android13'
+        if: inputs.fleet_target == '' && inputs.android_version != 'android12' && inputs.android_version != 'android13'
         uses: actions/cache@v5
         with:
           path: ~/.cache/bazel
@@ -416,6 +417,10 @@ jobs:
           done
 
           echo "REMOTE_BRANCH=$REMOTE_BRANCH" >> $GITHUB_ENV
+
+      - name: Pin registered kernel source and dependencies
+        if: inputs.fleet_target != ''
+        run: python3 scripts/fleet/prepare.py "$FLEET_TARGET"
 
       - name: 提取实际子版本号
         run: |
@@ -1392,10 +1397,12 @@ jobs:
             exit 1
           }
 
-          if ! wget -qO /tmp/bbg_setup.sh https://github.com/vc-teahouse/Baseband-guard/raw/main/setup.sh; then
+          if [ -n "${FLEET_BBG_SETUP:-}" ]; then
+            cp "$FLEET_BBG_SETUP" /tmp/bbg_setup.sh
+          elif ! wget -qO /tmp/bbg_setup.sh https://github.com/vc-teahouse/Baseband-guard/raw/main/setup.sh; then
             bbg_fail "BBG 安装脚本下载失败"
           fi
-          if ! sh /tmp/bbg_setup.sh; then
+          if ! sh /tmp/bbg_setup.sh ${FLEET_BBG_COMMIT:+"$FLEET_BBG_COMMIT"}; then
             bbg_fail "BBG 安装脚本执行失败"
           fi
           if [ ! -f common/security/baseband-guard/Kconfig ] || ! grep -q 'baseband-guard' common/security/Makefile; then
@@ -1883,7 +1890,9 @@ jobs:
               sed -i '/MODULES_ORDER=android\/gki_aarch64_modules/d' ./common/build.config.gki.aarch64
               sed -i '/KMI_SYMBOL_LIST_STRICT_MODE/d' ./common/build.config.gki.aarch64
 
-              if [ -f "build/build.sh" ]; then
+              if [ -n "$FLEET_TARGET" ]; then
+                bash "$GITHUB_WORKSPACE/scripts/fleet/compile.sh" || exit 1
+              elif [ -f "build/build.sh" ]; then
                 LTO=thin BUILD_CONFIG=common/build.config.gki.aarch64 build/build.sh CC="/usr/bin/ccache clang" || exit 1
                 strings "out/${{ inputs.android_version }}-${{ inputs.kernel_version }}/dist/Image" | grep 'Linux version'
               else
@@ -1958,11 +1967,26 @@ jobs:
           retention-days: 7
           compression-level: 9
 
+      - name: Validate registered complete kernel
+        id: fleet_verify
+        if: inputs.fleet_target != ''
+        run: python3 scripts/fleet/verify.py
+
+      - name: Upload exact kernel evidence
+        if: always() && inputs.fleet_target != ''
+        uses: actions/upload-artifact@v6
+        with:
+          name: fleet-evidence-${{ inputs.fleet_target }}
+          path: fleet-evidence/
+          if-no-files-found: ignore
+
       - name: 准备 Boot 镜像
         run: |
           mkdir -p bootimgs
 
-          if [ "${{ inputs.android_version }}" == "android12" ] || [ "${{ inputs.android_version }}" == "android13" ]; then
+          if [ -n "$FLEET_TARGET" ]; then
+            SRC_DIR="$KERNEL_ROOT/fleet-dist"
+          elif [ "${{ inputs.android_version }}" == "android12" ] || [ "${{ inputs.android_version }}" == "android13" ]; then
             SRC_DIR="$KERNEL_ROOT/out/${{ inputs.android_version }}-${{ inputs.kernel_version }}/dist"
           else
             SRC_DIR="$KERNEL_ROOT/bazel-bin/common/kernel_aarch64"
@@ -2074,7 +2098,7 @@ jobs:
           compression-level: 9
 
       - name: 上传全部构建产物
-        if: inputs.artifact_upload_mode == '上传全部'
+        if: inputs.artifact_upload_mode == '上传全部' && inputs.fleet_target == ''
         uses: actions/upload-artifact@v6
         with:
           name: ${{ env.AK3_NAME }}-AnyKernel3
@@ -2082,6 +2106,49 @@ jobs:
             *AnyKernel3.zip
             *.img
           compression-level: 9
+
+      - name: Package registered kernel delivery
+        if: inputs.fleet_target != '' && steps.fleet_verify.outcome == 'success'
+        run: |
+          mkdir -p fleet-package
+          cp -- *AnyKernel3.zip fleet-package/
+          cp fleet-evidence/validation.json "fleet-package/${FLEET_TARGET}-validation.json"
+          cp fleet-evidence/kernel.config "fleet-package/${FLEET_TARGET}-kernel.config"
+          (cd fleet-package && sha256sum * > "${FLEET_TARGET}-SHA256SUMS.txt")
+
+      - name: Upload registered kernel delivery
+        id: fleet_upload
+        if: inputs.fleet_target != '' && steps.fleet_verify.outcome == 'success'
+        uses: actions/upload-artifact@v6
+        with:
+          name: fleet-package-${{ inputs.fleet_target }}
+          path: fleet-package/
+          if-no-files-found: error
+
+      - name: Write registered kernel result
+        if: always() && inputs.fleet_target != ''
+        env:
+          VERIFIED: ${{ steps.fleet_verify.outcome }}
+          UPLOADED: ${{ steps.fleet_upload.outcome }}
+        run: |
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          p=Path('fleet-result'); p.mkdir(exist_ok=True)
+          source=Path('fleet-evidence/validation.json')
+          result=json.loads(source.read_text()) if source.exists() else {'target':os.environ['FLEET_TARGET']}
+          result['status']='success' if os.environ['VERIFIED']=='success' and os.environ['UPLOADED']=='success' else 'failure'
+          result['run_id']=os.environ['GITHUB_RUN_ID']
+          (p/'result.json').write_text(json.dumps(result,indent=2)+'\n')
+          PY
+
+      - name: Upload registered kernel result
+        if: always() && inputs.fleet_target != ''
+        uses: actions/upload-artifact@v6
+        with:
+          name: fleet-result-${{ inputs.fleet_target }}
+          path: fleet-result/
+          if-no-files-found: error
 
       - name: 上传补丁冲突文件
         if: always() && env.REJ_COUNT > 0

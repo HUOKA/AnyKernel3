@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "recipe_revision": 1,
+  "upstream_repository": "LyraVoid/FinaSU",
+  "channel": "release",
+  "retry_hours": 6,
+  "max_attempts": 3,
+  "options": {
+    "root": "FinaSU", "integration": "builtin", "susfs_version": "v2.4.0",
+    "hook": "susfs-inline", "lto": "thin", "zram_lz4kd": true,
+    "bbg": true, "network_enhance": true, "rekernel": false,
+    "kpm": false, "droidspaces": false, "nomount": false,
+    "mount": "runtime Magic Mount selection; not a kernel build switch"
+  },
+  "susfs": {
+    "android13-5.15": "c1d1da42b74771944207ec45aaceff9c57e84985",
+    "android14-6.1": "f76b81f2a6bf98e4029cc0c823c054edbec29803",
+    "android15-6.6": "f98f08223bbf469cc0a1542166383d253557fc32"
+  },
+  "dependencies": {
+    "AnyKernel3": {"url": "https://github.com/WildKernels/AnyKernel3.git", "commit": "e1e9dce98430c5c6f231f7094a8c7f4ecaf50948"},
+    "kernel_patches": {"url": "https://github.com/WildKernels/kernel_patches.git", "commit": "4d4dd02faacccb61dffaf1b0b3a1b87e2d71c52c"},
+    "SukiSU_patch": {"url": "https://github.com/ShirkNeko/SukiSU_patch.git", "commit": "4ee085a39e3c95e44c9cac7af040e83bf926e6fa"},
+    "Action-Build": {"url": "https://github.com/Numbersf/Action-Build.git", "commit": "be3539abb2fb1d31d763015f4f6a7f8fd27deb2d"}
+  }
+}

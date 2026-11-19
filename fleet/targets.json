@@ -1,0 +1,251 @@
+{
+  "schema": 1,
+  "targets": [
+    {
+      "id": "redmagic-515167",
+      "enabled": true,
+      "release": "5.15.167-android13-8-gbfd2ab010d7b",
+      "android": "android13",
+      "series": "5.15",
+      "sublevel": "167",
+      "patch_level": "2024-11",
+      "kmi_generation": 8,
+      "page_size": 4096,
+      "source": {
+        "url": "https://android.googlesource.com/kernel/common",
+        "commit": "bfd2ab010d7b36dd753731915553c4f37b98c6f6",
+        "relation": "release-commit"
+      },
+      "config": "fleet/configs/redmagic-515167.config",
+      "config_sha256": "903f226a4cbb98497bfa874e3d0bf0b0d78dd284758d2e6af88ac95f4002f0dc",
+      "symvers": "fleet/abi/redmagic-515167.symvers",
+      "symvers_sha256": "5b89017de7ac4efc46b512286a6a6808c48afba0b918011cdc97b8d050e5268c"
+    },
+    {
+      "id": "k80-61138",
+      "enabled": true,
+      "release": "6.1.138-android14-11-g5929004f86ffc-ab10004577-4k",
+      "android": "android14",
+      "series": "6.1",
+      "sublevel": "138",
+      "patch_level": "2025-06",
+      "kmi_generation": 11,
+      "page_size": 4096,
+      "source": {
+        "url": "https://android.googlesource.com/kernel/common",
+        "commit": "5929004f86ffc02c0b750715ec5a2b1541d14065",
+        "relation": "release-commit"
+      },
+      "config": "fleet/configs/k80-61138.config",
+      "config_sha256": "7e505f1650cda6f18bb1a9d45a75cbdee9d41869f893ce06a22becc0b1e0fff3",
+      "symvers": "fleet/abi/k80-61138.symvers",
+      "symvers_sha256": "16882c46a9bf82727c14bb008b123dc17b215dad29f7e7aa45f2d0b852aa929a"
+    },
+    {
+      "id": "gki-6689",
+      "enabled": true,
+      "release": "6.6.89-android15-8-g14220ae4ce65-ab13680582-4k",
+      "android": "android15",
+      "series": "6.6",
+      "sublevel": "89",
+      "patch_level": "2025-06",
+      "kmi_generation": 8,
+      "page_size": 4096,
+      "source": {
+        "url": "https://android.googlesource.com/kernel/common",
+        "commit": "14220ae4ce65ba58711f65587ef4e93f408892fb",
+        "relation": "release-commit"
+      },
+      "config": "fleet/configs/gki-6689.config",
+      "config_sha256": "6828cedf9426de7654a28b0870a494fd6e1c78701f8d115f86d1cd4e81832675",
+      "symvers": "fleet/abi/gki-6689.symvers",
+      "symvers_sha256": "61d2a295d4265dd10c1a5fa440e2a2812d151a9f4fcd0a66cfe86fe2e1b165fa"
+    },
+    {
+      "id": "gki-6692",
+      "enabled": true,
+      "release": "6.6.92-android15-8-g3637f4904cf5-ab13944661-4k",
+      "android": "android15",
+      "series": "6.6",
+      "sublevel": "92",
+      "patch_level": "2025-07",
+      "kmi_generation": 8,
+      "page_size": 4096,
+      "source": {
+        "url": "https://android.googlesource.com/kernel/common",
+        "commit": "3637f4904cf55eb3e7eccb9d747d754a4e199740",
+        "relation": "release-commit"
+      },
+      "config": "fleet/configs/gki-6692.config",
+      "config_sha256": "33acdb9c6cf4fdad45f9432eccb0c04c1fe5503761c2935e60a478998368fdcd",
+      "symvers": "fleet/abi/gki-6692.symvers",
+      "symvers_sha256": "b74fbcd84cd983bf468e1887827e0bd75a4f119ab540c43835051ac1b4b004c0"
+    },
+    {
+      "id": "miro-6677",
+      "enabled": true,
+      "release": "6.6.77-android15-8-g8d05d8f2439f6-ab10031983-4k",
+      "android": "android15",
+      "series": "6.6",
+      "sublevel": "77",
+      "patch_level": "2025-03",
+      "kmi_generation": 8,
+      "page_size": 4096,
+      "source": {
+        "url": "https://android.googlesource.com/kernel/common",
+        "commit": "f7ebe251035c0d15ff90c6a0a320697932785fad",
+        "relation": "recorded-source-with-target-abi-check"
+      },
+      "config": "fleet/configs/miro-6677.config",
+      "config_sha256": "87d37a0036e53c19446ff783dde84277ea76b497b268593138d6945783975444",
+      "symvers": "fleet/abi/miro-6677.symvers",
+      "symvers_sha256": "8219bb486f747d9fc46bc117ba79b2787e8c08a94c6603340eb55e824f6502da"
+    },
+    {
+      "id": "op615-66118",
+      "enabled": true,
+      "release": "6.6.118-android15-8-g2e6b9c3812c5-ab15114928-4k",
+      "android": "android15",
+      "series": "6.6",
+      "sublevel": "118",
+      "patch_level": "2026-01",
+      "kmi_generation": 8,
+      "page_size": 4096,
+      "source": {
+        "url": "https://android.googlesource.com/kernel/common",
+        "commit": "2e6b9c3812c54b4704bf9dd557ac29e9d7d4ca4e",
+        "relation": "release-commit"
+      },
+      "config": "fleet/configs/op615-66118.config",
+      "config_sha256": "032ff35b6657c91047c93090a1884993ca622d0720fc2bb772a7ef0558c3fb7e",
+      "symvers": "fleet/abi/op615-66118.symvers",
+      "symvers_sha256": "f3f29863952f793e998ec37d721672237d33bae51cb58151b25b904dcd7e17a4"
+    },
+    {
+      "id": "opd2508-66118-ref",
+      "enabled": false,
+      "release": "6.6.118-android15-8-ge58033dc8ea6-abogki498046332-4k",
+      "android": "android15",
+      "series": "6.6",
+      "sublevel": "118",
+      "patch_level": "2026-01",
+      "kmi_generation": 8,
+      "page_size": 4096,
+      "source": {
+        "url": "",
+        "commit": "",
+        "relation": "unresolved",
+        "enabled": false,
+        "reason": "Target e58033dc8ea6 source and target config are not in the saved records; the available 2e6b9c3812c5 tree is a reference for a different build."
+      }
+    },
+    {
+      "id": "opd2404-61118",
+      "enabled": true,
+      "release": "6.1.118-android14-11-o-g64180ab070e5",
+      "android": "android14",
+      "series": "6.1",
+      "sublevel": "118",
+      "patch_level": "2025-01",
+      "kmi_generation": 11,
+      "page_size": 4096,
+      "source": {
+        "url": "https://github.com/OnePlusOSS/android_kernel_common_oneplus_sm8650.git",
+        "commit": "fe279280d704596b6668dd6c1e79e9939de9c723",
+        "relation": "recorded-vendor-source-with-target-abi-check",
+        "vendor": {
+          "url": "https://github.com/OnePlusOSS/android_kernel_modules_and_devicetree_oneplus_sm8650.git",
+          "commit": "3036f1489a3398bce78c8338ea3a09164297ffcb"
+        }
+      },
+      "config": "fleet/configs/opd2404-61118.config",
+      "config_sha256": "a85101389b7e5950e08de238032a0889b970c8959671b5d616c0141dbb53943a",
+      "symvers": "fleet/abi/opd2404-61118.symvers",
+      "symvers_sha256": "382d6832590fa7fadb9aebed625bd04379c9127516af75df9168553329252775"
+    },
+    {
+      "id": "tb321fu-61124",
+      "enabled": true,
+      "release": "6.1.124-android14-11-gd53339245194-ab13005711",
+      "android": "android14",
+      "series": "6.1",
+      "sublevel": "124",
+      "patch_level": "2025-02",
+      "kmi_generation": 11,
+      "page_size": 4096,
+      "source": {
+        "url": "https://android.googlesource.com/kernel/common",
+        "commit": "d533392451941315131f1ecddcea958e11ec6b98",
+        "relation": "release-commit"
+      },
+      "config": "fleet/configs/tb321fu-61124.config",
+      "config_sha256": "3fd46eab5a1fb8bce1f5b167d42fbe3e0656b9feeaec7b7230a96f6b851888db",
+      "symvers": "fleet/abi/tb321fu-61124.symvers",
+      "symvers_sha256": "16882c46a9bf82727c14bb008b123dc17b215dad29f7e7aa45f2d0b852aa929a"
+    },
+    {
+      "id": "tb710fu-61157",
+      "enabled": true,
+      "release": "6.1.157-android14-11-g82d681c9b06b-ab14634535",
+      "android": "android14",
+      "series": "6.1",
+      "sublevel": "157",
+      "patch_level": "2025-12",
+      "kmi_generation": 11,
+      "page_size": 4096,
+      "source": {
+        "url": "https://android.googlesource.com/kernel/common",
+        "commit": "82d681c9b06bb8fb2cec58f7b2ae05644e6372f1",
+        "relation": "release-commit"
+      },
+      "config": "fleet/configs/tb710fu-61157.config",
+      "config_sha256": "724b41013408c3222d6e713899f152d9de180bba104f638bd99e933b5b99dba8",
+      "symvers": "fleet/abi/tb710fu-61157.symvers",
+      "symvers_sha256": "16882c46a9bf82727c14bb008b123dc17b215dad29f7e7aa45f2d0b852aa929a"
+    },
+    {
+      "id": "pkg110-61141",
+      "enabled": true,
+      "release": "6.1.141-android14-11-o-g41d58e50fc53",
+      "android": "android14",
+      "series": "6.1",
+      "sublevel": "141",
+      "patch_level": "2025-07",
+      "kmi_generation": 11,
+      "page_size": 4096,
+      "source": {
+        "url": "https://github.com/OnePlusOSS/android_kernel_common_oneplus_sm8650.git",
+        "commit": "34d0b26abc5f76a488eca6c77ac992f3d8fb68f9",
+        "relation": "recorded-vendor-source-with-target-abi-check",
+        "vendor": {
+          "url": "https://github.com/OnePlusOSS/android_kernel_modules_and_devicetree_oneplus_sm8650.git",
+          "commit": "453d8875f815bf9dfad9035982861226a4823a6c"
+        }
+      },
+      "config": "fleet/configs/pkg110-61141.config",
+      "config_sha256": "08391a78b2475b1a2437a31278931f27af0cf03db31b8fd71634253890bddb19",
+      "symvers": "fleet/abi/pkg110-61141.symvers",
+      "symvers_sha256": "ebfb0211d987e309767be391490e127f9bfc57dddbd6b56fab36652a115b7d34"
+    },
+    {
+      "id": "turner-66118-abogki519650608",
+      "enabled": true,
+      "release": "6.6.118-android15-8-gc44b714366cc-abogki519650608-4k",
+      "android": "android15",
+      "series": "6.6",
+      "sublevel": "118",
+      "patch_level": "2026-01",
+      "kmi_generation": 8,
+      "page_size": 4096,
+      "source": {
+        "url": "https://github.com/lakitu12/android_kernel_xiaomi_dash.git",
+        "commit": "537fe1868bf651d5689d9bccd2db67bbb4cc0a1b",
+        "relation": "recorded-vendor-source-with-target-abi-check"
+      },
+      "config": "fleet/configs/turner-66118-abogki519650608.config",
+      "config_sha256": "b0d736bdabcaee13014e029e167c129e54777f4f4b0b0713dacdb153ffd64d3c",
+      "symvers": "fleet/abi/turner-66118-abogki519650608.symvers",
+      "symvers_sha256": "b82afe76cfc01fa6c7099197277a845e48cc3360ce06cc0f94f4c57915fe4cdb"
+    }
+  ]
+}

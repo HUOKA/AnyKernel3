@@ -1,0 +1,122 @@
+name: FinaSU exact kernel fleet
+
+on:
+  schedule:
+    - cron: '17,47 * * * *'
+  workflow_dispatch:
+    inputs:
+      targets:
+        description: 'Optional comma-separated target ids; empty selects all registered targets'
+        type: string
+        default: ''
+      force:
+        description: 'Rebuild even when the same inputs already succeeded or retry limit was reached'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: finasu-exact-kernel-fleet
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    outputs:
+      has_work: ${{ steps.plan.outputs.has_work }}
+      matrix: ${{ steps.plan.outputs.matrix }}
+      ksu_commit: ${{ steps.plan.outputs.ksu_commit }}
+      cert_size: ${{ steps.manager.outputs.cert_size }}
+      cert_hash: ${{ steps.manager.outputs.cert_hash }}
+    steps:
+      - uses: actions/checkout@v7
+      - name: Resolve release and select unfinished targets
+        id: plan
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TARGETS: ${{ inputs.targets }}
+          FORCE: ${{ inputs.force }}
+        run: |
+          ARGS=()
+          if [ "$FORCE" = true ]; then ARGS+=(--force); fi
+          python3 scripts/fleet/controller.py plan --repository "$GITHUB_REPOSITORY" --only "$TARGETS" "${ARGS[@]}"
+      - name: Download the release-matched manager
+        id: manager
+        if: steps.plan.outputs.has_work == 'true'
+        run: python3 scripts/fleet/manager.py
+      - uses: actions/upload-artifact@v6
+        with:
+          name: fleet-plan
+          path: fleet-plan.json
+      - uses: actions/upload-artifact@v6
+        if: steps.plan.outputs.has_work == 'true'
+        with:
+          name: fleet-manager
+          path: fleet-manager/
+
+  build:
+    needs: plan
+    if: needs.plan.outputs.has_work == 'true'
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    uses: ./.github/workflows/build.yml
+    with:
+      fleet_target: ${{ matrix.id }}
+      android_version: ${{ matrix.android }}
+      kernel_version: ${{ matrix.series }}
+      sub_level: ${{ matrix.sublevel }}
+      os_patch_level: ${{ matrix.patch_level }}
+      ksu_variant: FinaSU
+      ksu_commit: ${{ needs.plan.outputs.ksu_commit }}
+      ksu_cert_size: ${{ needs.plan.outputs.cert_size }}
+      ksu_cert_hash: ${{ needs.plan.outputs.cert_hash }}
+      enable_susfs: true
+      ksu_mode: '关闭'
+      use_zram: true
+      use_bbg: true
+      use_net_enhance: true
+      use_kpm: false
+      use_rekernel: false
+      use_nomount: false
+      droidspaces: 'off'
+      skip_incompatible: false
+      artifact_upload_mode: '上传全部'
+
+  record:
+    needs: [plan, build]
+    if: always() && needs.plan.result == 'success' && needs.plan.outputs.has_work == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/download-artifact@v8
+        with:
+          name: fleet-plan
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: fleet-result-*
+          path: fleet-results
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: fleet-package-*
+          path: fleet-packages
+      - uses: actions/download-artifact@v8
+        with:
+          name: fleet-manager
+          path: fleet-manager
+      - name: Publish validated packages and retain per-target state
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/fleet/controller.py finish --repository "$GITHUB_REPOSITORY"
+      - uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: fleet-summary
+          path: fleet-summary.md
+          if-no-files-found: ignore
