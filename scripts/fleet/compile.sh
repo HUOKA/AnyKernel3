@@ -19,6 +19,17 @@ export KBUILD_BUILD_USER=build-user KBUILD_BUILD_HOST=build-host
 export KBUILD_BUILD_TIMESTAMP="$(date -u '+%a %b %e %T UTC %Y')"
 
 cp "$DEFCONFIG" "$OUT/.config"
+# The imported userspace LZ4 header adds ELF visibility annotations to public
+# prototypes. Kernel exports already carry their visibility; genksyms 6.6 would
+# otherwise encode the extra annotation and change existing vendor-module CRCs.
+python3 - <<'PY'
+from pathlib import Path
+p=Path('common/lib/lz4/lz4.h')
+text=p.read_text()
+text=text.replace('#define LZ4LIB_VISIBILITY __attribute__((visibility("default")))',
+                  '#define LZ4LIB_VISIBILITY /* kernel EXPORT_SYMBOL owns visibility */')
+p.write_text(text)
+PY
 python3 - "$GITHUB_WORKSPACE" "$KERNEL_ROOT" "$OUT" <<'PY'
 import json, pathlib, re, sys
 repo, kernel, out = map(pathlib.Path, sys.argv[1:])

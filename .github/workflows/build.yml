@@ -2014,7 +2014,7 @@ jobs:
           cp -a "$ANYKERNEL3/." "$GITHUB_WORKSPACE/AnyKernel3-package/"
 
       - name: 构建 Boot 镜像 (Android 12)
-        if: inputs.android_version == 'android12'
+        if: inputs.fleet_target == '' && inputs.android_version == 'android12'
         working-directory: bootimgs
         run: |
           GKI_URL=https://dl.google.com/android/gki/gki-certified-boot-android12-5.10-${{ inputs.os_patch_level }}_${{ inputs.revision }}.zip
@@ -2045,7 +2045,7 @@ jobs:
           cp ./boot-lz4.img ../${{ inputs.android_version }}-${{ inputs.kernel_version }}.${NAME_SUBLEVEL}-${{ inputs.os_patch_level }}-boot-lz4.img
 
       - name: 构建 Boot 镜像 (Android 13+)
-        if: inputs.android_version == 'android13' || inputs.android_version == 'android14' || inputs.android_version == 'android15' || inputs.android_version == 'android16' || inputs.android_version == 'android17'
+        if: inputs.fleet_target == '' && (inputs.android_version == 'android13' || inputs.android_version == 'android14' || inputs.android_version == 'android15' || inputs.android_version == 'android16' || inputs.android_version == 'android17')
         working-directory: bootimgs
         run: |
           gzip -n -k -f -9 ./Image > ./Image.gz

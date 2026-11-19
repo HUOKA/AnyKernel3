@@ -1,0 +1,94 @@
+diff --git a/drivers/android/vendor_hooks.c b/drivers/android/vendor_hooks.c
+--- a/drivers/android/vendor_hooks.c
++++ b/drivers/android/vendor_hooks.c
+@@ -476,6 +476,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_file_open);
+ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_f2fs_down_read);
+ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_improve_priority);
+ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_restore_priority);
++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_ioc_set_pin_file);
+ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_uplink_send_msg);
+ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_inet_create);
+ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sock_create);
+diff --git a/fs/f2fs/file.c b/fs/f2fs/file.c
+--- a/fs/f2fs/file.c
++++ b/fs/f2fs/file.c
+@@ -3453,6 +3453,7 @@ static int f2fs_ioc_set_pin_file(struct file *filp, unsigned long arg)
+ 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+ 	__u32 pin;
+ 	int ret = 0;
++	bool allow_pin_big_file = false;
+ 
+ 	if (get_user(pin, (__u32 __user *)arg))
+ 		return -EFAULT;
+@@ -3485,7 +3486,9 @@ static int f2fs_ioc_set_pin_file(struct file *filp, unsigned long arg)
+ 		goto done;
+ 	}
+ 
+-	if (F2FS_HAS_BLOCKS(inode)) {
++	trace_android_vh_f2fs_ioc_set_pin_file(inode, f2fs_sb_has_blkzoned(sbi),
++						&allow_pin_big_file);
++	if (!allow_pin_big_file && F2FS_HAS_BLOCKS(inode)) {
+ 		ret = -EFBIG;
+ 		goto out;
+ 	}
+diff --git a/include/trace/hooks/fs.h b/include/trace/hooks/fs.h
+--- a/include/trace/hooks/fs.h
++++ b/include/trace/hooks/fs.h
+@@ -16,6 +16,10 @@ DECLARE_HOOK(android_vh_f2fs_file_open,
+ 	TP_PROTO(struct inode *inode, struct file *filp),
+ 	TP_ARGS(inode, filp));
+ 
++DECLARE_HOOK(android_vh_f2fs_ioc_set_pin_file,
++	TP_PROTO(struct inode *inode, bool has_blkzoned, bool *allow_pin_big_file),
++	TP_ARGS(inode, has_blkzoned, allow_pin_big_file));
++
+ DECLARE_RESTRICTED_HOOK(android_rvh_f2fs_down_read,
+ 	TP_PROTO(wait_queue_head_t *read_waiters, struct rw_semaphore *rwsem, bool *skip),
+ 	TP_ARGS(read_waiters, rwsem, skip), 1);
+diff --git a/mm/memory.c b/mm/memory.c
+--- a/mm/memory.c
++++ b/mm/memory.c
+@@ -713,6 +713,7 @@ struct folio *vm_normal_folio_pmd(struct vm_area_struct *vma,
+ 		return page_folio(page);
+ 	return NULL;
+ }
++EXPORT_SYMBOL_GPL(vm_normal_folio_pmd);
+ #endif
+ 
+ static void restore_exclusive_pte(struct vm_area_struct *vma,
+diff --git a/net/l2tp/l2tp_core.c b/net/l2tp/l2tp_core.c
+--- a/net/l2tp/l2tp_core.c
++++ b/net/l2tp/l2tp_core.c
+@@ -180,6 +180,20 @@ struct l2tp_tunnel *l2tp_sk_to_tunnel(struct sock *sk)
+ }
+ EXPORT_SYMBOL_GPL(l2tp_sk_to_tunnel);
+ 
++void l2tp_tunnel_put(struct l2tp_tunnel *tunnel)
++{
++	if (refcount_dec_and_test(&tunnel->ref_count))
++		l2tp_tunnel_free(tunnel);
++}
++EXPORT_SYMBOL_GPL(l2tp_tunnel_put);
++
++void l2tp_session_put(struct l2tp_session *session)
++{
++	if (refcount_dec_and_test(&session->ref_count))
++		l2tp_session_free(session);
++}
++EXPORT_SYMBOL_GPL(l2tp_session_put);
++
+ void l2tp_tunnel_inc_refcount(struct l2tp_tunnel *tunnel)
+ {
+ 	refcount_inc(&tunnel->ref_count);
+diff --git a/net/l2tp/l2tp_core.h b/net/l2tp/l2tp_core.h
+--- a/net/l2tp/l2tp_core.h
++++ b/net/l2tp/l2tp_core.h
+@@ -213,6 +213,8 @@ static inline void *l2tp_session_priv(struct l2tp_session *session)
+ }
+ 
+ /* Tunnel and session refcounts */
++void l2tp_tunnel_put(struct l2tp_tunnel *tunnel);
++void l2tp_session_put(struct l2tp_session *session);
+ void l2tp_tunnel_inc_refcount(struct l2tp_tunnel *tunnel);
+ void l2tp_tunnel_dec_refcount(struct l2tp_tunnel *tunnel);
+ void l2tp_session_inc_refcount(struct l2tp_session *session);

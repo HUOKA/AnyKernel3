@@ -40,6 +40,11 @@ def main():
     makefile = (source / "Makefile").read_text()
     actual = ".".join(re.search(rf"^{k} = (\d+)$", makefile, re.M)[1] for k in ["VERSION", "PATCHLEVEL", "SUBLEVEL"])
     assert actual == f"{target['series']}.{target['sublevel']}", actual
+    for patch in target['source'].get('patches', []):
+        file = ROOT / patch['path']
+        assert hashlib.sha256(file.read_bytes()).hexdigest() == patch['sha256']
+        subprocess.run(['git', 'apply', '--check', str(file)], cwd=source, check=True)
+        subprocess.run(['git', 'apply', str(file)], cwd=source, check=True)
     vendor = target["source"].get("vendor")
     if vendor:
         modules = kernel_root / "vendor-source"

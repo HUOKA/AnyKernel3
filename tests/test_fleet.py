@@ -67,6 +67,8 @@ class ManifestTests(unittest.TestCase):
                 self.assertEqual(hashlib.sha256((ROOT/t[path]).read_bytes()).hexdigest(),t[key])
             self.assertNotIn('/home/',(ROOT/t['config']).read_text())
             self.assertRegex(t['source']['commit'],r'^[a-f0-9]{40}$')
+            for patch in t['source'].get('patches',[]):
+                self.assertEqual(hashlib.sha256((ROOT/patch['path']).read_bytes()).hexdigest(),patch['sha256'])
 
     def test_inline_required_independently_from_susfs(self):
         config='CONFIG_KSU=y\nCONFIG_KSU_SUSFS=y\nCONFIG_KSU_HOOK_TRACEPOINT=y\n'

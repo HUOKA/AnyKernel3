@@ -1,14 +1,84 @@
 {
-  "redmagic-515167": {"url": "https://android.googlesource.com/kernel/common", "commit": "bfd2ab010d7b36dd753731915553c4f37b98c6f6", "relation": "release-commit"},
-  "k80-61138": {"url": "https://android.googlesource.com/kernel/common", "commit": "5929004f86ffc02c0b750715ec5a2b1541d14065", "relation": "release-commit"},
-  "gki-6689": {"url": "https://android.googlesource.com/kernel/common", "commit": "14220ae4ce65ba58711f65587ef4e93f408892fb", "relation": "release-commit"},
-  "gki-6692": {"url": "https://android.googlesource.com/kernel/common", "commit": "3637f4904cf55eb3e7eccb9d747d754a4e199740", "relation": "release-commit"},
-  "miro-6677": {"url": "https://android.googlesource.com/kernel/common", "commit": "f7ebe251035c0d15ff90c6a0a320697932785fad", "relation": "recorded-source-with-target-abi-check"},
-  "op615-66118": {"url": "https://android.googlesource.com/kernel/common", "commit": "2e6b9c3812c54b4704bf9dd557ac29e9d7d4ca4e", "relation": "release-commit"},
-  "opd2508-66118-ref": {"url": "", "commit": "", "relation": "unresolved", "enabled": false, "reason": "Target e58033dc8ea6 source and target config are not in the saved records; the available 2e6b9c3812c5 tree is a reference for a different build."},
-  "opd2404-61118": {"url": "https://github.com/OnePlusOSS/android_kernel_common_oneplus_sm8650.git", "commit": "fe279280d704596b6668dd6c1e79e9939de9c723", "relation": "recorded-vendor-source-with-target-abi-check", "vendor": {"url": "https://github.com/OnePlusOSS/android_kernel_modules_and_devicetree_oneplus_sm8650.git", "commit": "3036f1489a3398bce78c8338ea3a09164297ffcb"}},
-  "tb321fu-61124": {"url": "https://android.googlesource.com/kernel/common", "commit": "d533392451941315131f1ecddcea958e11ec6b98", "relation": "release-commit"},
-  "tb710fu-61157": {"url": "https://android.googlesource.com/kernel/common", "commit": "82d681c9b06bb8fb2cec58f7b2ae05644e6372f1", "relation": "release-commit"},
-  "pkg110-61141": {"url": "https://github.com/OnePlusOSS/android_kernel_common_oneplus_sm8650.git", "commit": "34d0b26abc5f76a488eca6c77ac992f3d8fb68f9", "relation": "recorded-vendor-source-with-target-abi-check", "vendor": {"url": "https://github.com/OnePlusOSS/android_kernel_modules_and_devicetree_oneplus_sm8650.git", "commit": "453d8875f815bf9dfad9035982861226a4823a6c"}},
-  "turner-66118-abogki519650608": {"url": "https://github.com/lakitu12/android_kernel_xiaomi_dash.git", "commit": "537fe1868bf651d5689d9bccd2db67bbb4cc0a1b", "relation": "recorded-vendor-source-with-target-abi-check"}
+  "redmagic-515167": {
+    "url": "https://android.googlesource.com/kernel/common",
+    "commit": "bfd2ab010d7b36dd753731915553c4f37b98c6f6",
+    "relation": "release-commit"
+  },
+  "k80-61138": {
+    "url": "https://android.googlesource.com/kernel/common",
+    "commit": "5929004f86ffc02c0b750715ec5a2b1541d14065",
+    "relation": "release-commit"
+  },
+  "gki-6689": {
+    "url": "https://android.googlesource.com/kernel/common",
+    "commit": "14220ae4ce65ba58711f65587ef4e93f408892fb",
+    "relation": "release-commit",
+    "compatibility_revision": 1
+  },
+  "gki-6692": {
+    "url": "https://android.googlesource.com/kernel/common",
+    "commit": "3637f4904cf55eb3e7eccb9d747d754a4e199740",
+    "relation": "release-commit",
+    "compatibility_revision": 1,
+    "patches": [
+      {
+        "path": "fleet/patches/gki-6692-export-backports.patch",
+        "sha256": "a489d12cfcdaacf8743a50055d0d773f72bbc58c6ed64e253738b0eb258fb536",
+        "origin": "AOSP f6d915c22798c46f62ff2e62dd0af3ff5e7396c3: f2fs pin-file hook, vm_normal_folio_pmd export, l2tp put API bodies; keeps existing ABI entrypoints"
+      }
+    ]
+  },
+  "miro-6677": {
+    "url": "https://android.googlesource.com/kernel/common",
+    "commit": "f7ebe251035c0d15ff90c6a0a320697932785fad",
+    "relation": "recorded-source-with-target-abi-check",
+    "compatibility_revision": 1
+  },
+  "op615-66118": {
+    "url": "https://android.googlesource.com/kernel/common",
+    "commit": "2e6b9c3812c54b4704bf9dd557ac29e9d7d4ca4e",
+    "relation": "release-commit",
+    "compatibility_revision": 1
+  },
+  "opd2508-66118-ref": {
+    "url": "",
+    "commit": "",
+    "relation": "unresolved",
+    "enabled": false,
+    "reason": "Target e58033dc8ea6 source and target config are not in the saved records; the available 2e6b9c3812c5 tree is a reference for a different build."
+  },
+  "opd2404-61118": {
+    "url": "https://github.com/OnePlusOSS/android_kernel_common_oneplus_sm8650.git",
+    "commit": "fe279280d704596b6668dd6c1e79e9939de9c723",
+    "relation": "recorded-vendor-source-with-target-abi-check",
+    "vendor": {
+      "url": "https://github.com/OnePlusOSS/android_kernel_modules_and_devicetree_oneplus_sm8650.git",
+      "commit": "3036f1489a3398bce78c8338ea3a09164297ffcb"
+    }
+  },
+  "tb321fu-61124": {
+    "url": "https://android.googlesource.com/kernel/common",
+    "commit": "d533392451941315131f1ecddcea958e11ec6b98",
+    "relation": "release-commit"
+  },
+  "tb710fu-61157": {
+    "url": "https://android.googlesource.com/kernel/common",
+    "commit": "82d681c9b06bb8fb2cec58f7b2ae05644e6372f1",
+    "relation": "release-commit"
+  },
+  "pkg110-61141": {
+    "url": "https://github.com/OnePlusOSS/android_kernel_common_oneplus_sm8650.git",
+    "commit": "34d0b26abc5f76a488eca6c77ac992f3d8fb68f9",
+    "relation": "recorded-vendor-source-with-target-abi-check",
+    "vendor": {
+      "url": "https://github.com/OnePlusOSS/android_kernel_modules_and_devicetree_oneplus_sm8650.git",
+      "commit": "453d8875f815bf9dfad9035982861226a4823a6c"
+    }
+  },
+  "turner-66118-abogki519650608": {
+    "url": "https://github.com/lakitu12/android_kernel_xiaomi_dash.git",
+    "commit": "537fe1868bf651d5689d9bccd2db67bbb4cc0a1b",
+    "relation": "recorded-vendor-source-with-target-abi-check",
+    "compatibility_revision": 1
+  }
 }

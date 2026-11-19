@@ -54,7 +54,8 @@
       "source": {
         "url": "https://android.googlesource.com/kernel/common",
         "commit": "14220ae4ce65ba58711f65587ef4e93f408892fb",
-        "relation": "release-commit"
+        "relation": "release-commit",
+        "compatibility_revision": 1
       },
       "config": "fleet/configs/gki-6689.config",
       "config_sha256": "6828cedf9426de7654a28b0870a494fd6e1c78701f8d115f86d1cd4e81832675",
@@ -74,7 +75,15 @@
       "source": {
         "url": "https://android.googlesource.com/kernel/common",
         "commit": "3637f4904cf55eb3e7eccb9d747d754a4e199740",
-        "relation": "release-commit"
+        "relation": "release-commit",
+        "compatibility_revision": 1,
+        "patches": [
+          {
+            "path": "fleet/patches/gki-6692-export-backports.patch",
+            "sha256": "a489d12cfcdaacf8743a50055d0d773f72bbc58c6ed64e253738b0eb258fb536",
+            "origin": "AOSP f6d915c22798c46f62ff2e62dd0af3ff5e7396c3: f2fs pin-file hook, vm_normal_folio_pmd export, l2tp put API bodies; keeps existing ABI entrypoints"
+          }
+        ]
       },
       "config": "fleet/configs/gki-6692.config",
       "config_sha256": "33acdb9c6cf4fdad45f9432eccb0c04c1fe5503761c2935e60a478998368fdcd",
@@ -94,7 +103,8 @@
       "source": {
         "url": "https://android.googlesource.com/kernel/common",
         "commit": "f7ebe251035c0d15ff90c6a0a320697932785fad",
-        "relation": "recorded-source-with-target-abi-check"
+        "relation": "recorded-source-with-target-abi-check",
+        "compatibility_revision": 1
       },
       "config": "fleet/configs/miro-6677.config",
       "config_sha256": "87d37a0036e53c19446ff783dde84277ea76b497b268593138d6945783975444",
@@ -114,7 +124,8 @@
       "source": {
         "url": "https://android.googlesource.com/kernel/common",
         "commit": "2e6b9c3812c54b4704bf9dd557ac29e9d7d4ca4e",
-        "relation": "release-commit"
+        "relation": "release-commit",
+        "compatibility_revision": 1
       },
       "config": "fleet/configs/op615-66118.config",
       "config_sha256": "032ff35b6657c91047c93090a1884993ca622d0720fc2bb772a7ef0558c3fb7e",
@@ -240,7 +251,8 @@
       "source": {
         "url": "https://github.com/lakitu12/android_kernel_xiaomi_dash.git",
         "commit": "537fe1868bf651d5689d9bccd2db67bbb4cc0a1b",
-        "relation": "recorded-vendor-source-with-target-abi-check"
+        "relation": "recorded-vendor-source-with-target-abi-check",
+        "compatibility_revision": 1
       },
       "config": "fleet/configs/turner-66118-abogki519650608.config",
       "config_sha256": "b0d736bdabcaee13014e029e167c129e54777f4f4b0b0713dacdb153ffd64d3c",
