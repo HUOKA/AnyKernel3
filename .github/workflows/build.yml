@@ -417,6 +417,19 @@ jobs:
 
           echo "REMOTE_BRANCH=$REMOTE_BRANCH" >> $GITHUB_ENV
 
+      - name: Pin NX729J exact kernel source
+        if: inputs.android_version == 'android13' && inputs.kernel_version == '5.15' && inputs.sub_level == '167' && inputs.ksu_variant == 'BakaSU'
+        working-directory: ${{ env.KERNEL_ROOT }}
+        run: |
+          EXPECTED=bfd2ab010d7b36dd753731915553c4f37b98c6f6
+          if [ "$(git -C common rev-parse HEAD)" != "$EXPECTED" ]; then
+            git -C common fetch --depth 1 https://android.googlesource.com/kernel/common "$EXPECTED"
+            git -C common checkout --detach "$EXPECTED"
+          fi
+          test "$(git -C common rev-parse HEAD)" = "$EXPECTED"
+          grep -q '^SUBLEVEL = 167$' common/Makefile
+          echo "NX729J kernel source: $EXPECTED"
+
       - name: 提取实际子版本号
         run: |
           ACTUAL_SUBLEVEL="${{ inputs.sub_level }}"
@@ -1957,6 +1970,18 @@ jobs:
           if-no-files-found: warn
           retention-days: 7
           compression-level: 9
+
+      - name: Verify NX729J configuration and collect build evidence
+        if: inputs.android_version == 'android13' && inputs.kernel_version == '5.15' && inputs.sub_level == '167' && inputs.ksu_variant == 'BakaSU'
+        run: bash scripts/nx729j-build-evidence.sh
+
+      - name: Upload NX729J build evidence
+        if: always() && inputs.android_version == 'android13' && inputs.kernel_version == '5.15' && inputs.sub_level == '167' && inputs.ksu_variant == 'BakaSU'
+        uses: actions/upload-artifact@v6
+        with:
+          name: NX729J-BakaSU-build-evidence
+          path: nx729j-build-evidence/
+          if-no-files-found: ignore
 
       - name: 准备 Boot 镜像
         run: |
