@@ -2,3 +2,7 @@
 # lines and kernel-style tab indentation.
 security_patch/*.patch -whitespace
 scripts/sukisu_compat/*.patch -whitespace
+fleet/** text eol=lf
+scripts/fleet/** text eol=lf
+tests/test_fleet.py text eol=lf
+.github/workflows/finasu-fleet.yml text eol=lf

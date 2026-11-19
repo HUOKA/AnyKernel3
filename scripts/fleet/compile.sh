@@ -40,7 +40,9 @@ for k,v in settings.items():
 p.write_text(c)
 suffix=t['release'].removeprefix(t['series']+'.'+t['sublevel'])
 script=kernel/'common/scripts/setlocalversion'
-script.write_text('#!/bin/sh\nprintf "%s\\n" '+repr(suffix)+'\n')
+makefile=(kernel/'common/Makefile').read_text()
+release_value=t['release'] if 'filechk_kernel.release = $(srctree)/scripts/setlocalversion' in makefile else suffix
+script.write_text('#!/bin/sh\nprintf "%s\\n" '+repr(release_value)+'\n')
 script.chmod(0o755)
 PY
 
