@@ -2,11 +2,11 @@
   "schema": 1,
   "targets": {
     "redmagic-515167": {
-      "key": "f043018f38aeaf5dcfb1ed80a784ecc7c9ea9afbd18dcc84ffbaca4c7272442d",
-      "status": "failure",
-      "updated_at": "2026-11-19T06:54:56.633804+00:00",
-      "attempts": 2,
-      "run_id": "44474606564",
+      "key": "20b132c38a17b0070686b33571b86b18ac11950181f49dcccf2465829959ab25",
+      "status": "success",
+      "updated_at": "2026-11-19T08:17:56.651962+00:00",
+      "attempts": 1,
+      "run_id": "44475571581",
       "release": {
         "repository": "LyraVoid/FinaSU",
         "tag": "v1.6.4",
@@ -20,16 +20,33 @@
       },
       "result": {
         "target": "redmagic-515167",
-        "status": "failure",
-        "run_id": "44474606564"
-      }
+        "status": "success",
+        "problems": [],
+        "release": "5.15.167-android13-8-gbfd2ab010d7b",
+        "kernel_source": "bfd2ab010d7b36dd753731915553c4f37b98c6f6",
+        "finasu_commit": "ff0e34f1d9d5694ab7b4f1e318a77c781d65cb41",
+        "susfs_commit": "c1d1da42b74771944207ec45aaceff9c57e84985",
+        "missing_config": [],
+        "unexpected_config": [],
+        "abi": {
+          "reference_symbols": 8401,
+          "candidate_symbols": 8401,
+          "changed": [],
+          "missing": []
+        },
+        "image_sha256": "0bb35cc13456d70ed130af3c00a1d80182dc1cd894495131284e472c92118f42",
+        "image_bytes": 43784704,
+        "runtime_acceptance": "not performed",
+        "run_id": "44475571581"
+      },
+      "published_tag": "finasu-v1.6.4-d5c97106"
     },
     "k80-61138": {
-      "key": "ae948b7fcc15b63cd2fa8c3897ff9d6d6f6b7460c1d33851d00dc890ab1610a9",
-      "status": "failure",
-      "updated_at": "2026-11-19T06:54:56.633804+00:00",
-      "attempts": 2,
-      "run_id": "44474606564",
+      "key": "fbcaec4bdf3acae7c84a7da6927d841cfd9c6769a5ad8764b18d7ffc0f3e066c",
+      "status": "success",
+      "updated_at": "2026-11-19T08:17:56.651962+00:00",
+      "attempts": 1,
+      "run_id": "44475571581",
       "release": {
         "repository": "LyraVoid/FinaSU",
         "tag": "v1.6.4",
@@ -43,16 +60,33 @@
       },
       "result": {
         "target": "k80-61138",
-        "status": "failure",
-        "run_id": "44474606564"
-      }
+        "status": "success",
+        "problems": [],
+        "release": "6.1.138-android14-11-g5929004f86ffc-ab10004577-4k",
+        "kernel_source": "5929004f86ffc02c0b750715ec5a2b1541d14065",
+        "finasu_commit": "ff0e34f1d9d5694ab7b4f1e318a77c781d65cb41",
+        "susfs_commit": "f76b81f2a6bf98e4029cc0c823c054edbec29803",
+        "missing_config": [],
+        "unexpected_config": [],
+        "abi": {
+          "reference_symbols": 8508,
+          "candidate_symbols": 8508,
+          "changed": [],
+          "missing": []
+        },
+        "image_sha256": "e225b2ad98c59fc3a393f8150bcd134eac006263f6018bc31595c20c1bc5a9a9",
+        "image_bytes": 38668800,
+        "runtime_acceptance": "not performed",
+        "run_id": "44475571581"
+      },
+      "published_tag": "finasu-v1.6.4-d5c97106"
     },
     "gki-6689": {
-      "key": "53d5793163c1f24c330c6f8c62d43c0c68c7aa5f47d493766d7a8867db8963b0",
+      "key": "2b0e5f08750ae7cfa56f2f31fc0098f0a592cbc80da327bb6f78f093852a7971",
       "status": "failure",
-      "updated_at": "2026-11-19T06:54:56.633804+00:00",
-      "attempts": 2,
-      "run_id": "44474606564",
+      "updated_at": "2026-11-19T08:17:56.651962+00:00",
+      "attempts": 1,
+      "run_id": "44475571581",
       "release": {
         "repository": "LyraVoid/FinaSU",
         "tag": "v1.6.4",
@@ -67,15 +101,36 @@
       "result": {
         "target": "gki-6689",
         "status": "failure",
-        "run_id": "44474606564"
+        "problems": [
+          "Target ABI mismatch"
+        ],
+        "release": "6.6.89-android15-8-g14220ae4ce65-ab13680582-4k",
+        "kernel_source": "14220ae4ce65ba58711f65587ef4e93f408892fb",
+        "finasu_commit": "ff0e34f1d9d5694ab7b4f1e318a77c781d65cb41",
+        "susfs_commit": "f98f08223bbf469cc0a1542166383d253557fc32",
+        "missing_config": [],
+        "unexpected_config": [],
+        "abi": {
+          "reference_symbols": 9132,
+          "candidate_symbols": 9132,
+          "changed": [
+            "LZ4_decompress_safe",
+            "LZ4_decompress_safe_partial"
+          ],
+          "missing": []
+        },
+        "image_sha256": "c98c5f1a3cecc26e6de0fc4813d8b5bf2a717ad4a04f5505ea23b877b23be19c",
+        "image_bytes": 39709184,
+        "runtime_acceptance": "not performed",
+        "run_id": "44475571581"
       }
     },
     "gki-6692": {
-      "key": "5ebb4625506342f59ec2b411eb8a5dd660b3f393175b0671a7e7757d8f281346",
+      "key": "1aed8291fda952b29263276fb7606bb534c69ca9c67c03449dea84842af754ae",
       "status": "failure",
-      "updated_at": "2026-11-19T06:54:56.633804+00:00",
-      "attempts": 2,
-      "run_id": "44474606564",
+      "updated_at": "2026-11-19T08:17:56.651962+00:00",
+      "attempts": 1,
+      "run_id": "44475571581",
       "release": {
         "repository": "LyraVoid/FinaSU",
         "tag": "v1.6.4",
@@ -90,15 +145,42 @@
       "result": {
         "target": "gki-6692",
         "status": "failure",
-        "run_id": "44474606564"
+        "problems": [
+          "Target ABI mismatch"
+        ],
+        "release": "6.6.92-android15-8-g3637f4904cf5-ab13944661-4k",
+        "kernel_source": "3637f4904cf55eb3e7eccb9d747d754a4e199740",
+        "finasu_commit": "ff0e34f1d9d5694ab7b4f1e318a77c781d65cb41",
+        "susfs_commit": "f98f08223bbf469cc0a1542166383d253557fc32",
+        "missing_config": [],
+        "unexpected_config": [],
+        "abi": {
+          "reference_symbols": 9168,
+          "candidate_symbols": 9167,
+          "changed": [
+            "LZ4_decompress_safe",
+            "LZ4_decompress_safe_partial"
+          ],
+          "missing": [
+            "__traceiter_android_vh_f2fs_ioc_set_pin_file",
+            "__tracepoint_android_vh_f2fs_ioc_set_pin_file",
+            "l2tp_session_put",
+            "l2tp_tunnel_put",
+            "vm_normal_folio_pmd"
+          ]
+        },
+        "image_sha256": "f5a6a2b62d1b323a2cf2f86e84d6943fd8fa5f1ce126e6fb822af86c6b9c16f9",
+        "image_bytes": 39713280,
+        "runtime_acceptance": "not performed",
+        "run_id": "44475571581"
       }
     },
     "miro-6677": {
-      "key": "73358bbdc9832c5efe7b786d833f51815def664dd9732776bea5fdf5f1a02460",
+      "key": "2196cb8136eb6733df10d4cf104ee7f3808a2e4cb41fcd3d95148f7106d06134",
       "status": "failure",
-      "updated_at": "2026-11-19T06:54:56.633804+00:00",
-      "attempts": 2,
-      "run_id": "44474606564",
+      "updated_at": "2026-11-19T08:17:56.651962+00:00",
+      "attempts": 1,
+      "run_id": "44475571581",
       "release": {
         "repository": "LyraVoid/FinaSU",
         "tag": "v1.6.4",
@@ -113,15 +195,36 @@
       "result": {
         "target": "miro-6677",
         "status": "failure",
-        "run_id": "44474606564"
+        "problems": [
+          "Target ABI mismatch"
+        ],
+        "release": "6.6.77-android15-8-g8d05d8f2439f6-ab10031983-4k",
+        "kernel_source": "f7ebe251035c0d15ff90c6a0a320697932785fad",
+        "finasu_commit": "ff0e34f1d9d5694ab7b4f1e318a77c781d65cb41",
+        "susfs_commit": "f98f08223bbf469cc0a1542166383d253557fc32",
+        "missing_config": [],
+        "unexpected_config": [],
+        "abi": {
+          "reference_symbols": 9047,
+          "candidate_symbols": 9047,
+          "changed": [
+            "LZ4_decompress_safe",
+            "LZ4_decompress_safe_partial"
+          ],
+          "missing": []
+        },
+        "image_sha256": "3b194f4200c221b547cd6d87d6f3fa7faa9ba652a3ea8597248c245a40245da0",
+        "image_bytes": 39569920,
+        "runtime_acceptance": "not performed",
+        "run_id": "44475571581"
       }
     },
     "op615-66118": {
-      "key": "bf9456d947434f9549e86023fb8d712deefc10ecd3ccbd83123721877aedce29",
+      "key": "b182ef2004c5b6755b386053fca50c52c67441d3a0db2283f18bbfff59e6ae2a",
       "status": "failure",
-      "updated_at": "2026-11-19T06:54:56.633804+00:00",
-      "attempts": 2,
-      "run_id": "44474606564",
+      "updated_at": "2026-11-19T08:17:56.651962+00:00",
+      "attempts": 1,
+      "run_id": "44475571581",
       "release": {
         "repository": "LyraVoid/FinaSU",
         "tag": "v1.6.4",
@@ -136,15 +239,45 @@
       "result": {
         "target": "op615-66118",
         "status": "failure",
-        "run_id": "44474606564"
+        "problems": [
+          "Target ABI mismatch"
+        ],
+        "release": "6.6.118-android15-8-g2e6b9c3812c5-ab15114928-4k",
+        "kernel_source": "2e6b9c3812c54b4704bf9dd557ac29e9d7d4ca4e",
+        "finasu_commit": "ff0e34f1d9d5694ab7b4f1e318a77c781d65cb41",
+        "susfs_commit": "f98f08223bbf469cc0a1542166383d253557fc32",
+        "missing_config": [],
+        "unexpected_config": [],
+        "abi": {
+          "reference_symbols": 9001,
+          "candidate_symbols": 9264,
+          "changed": [
+            "LZ4_compress_HC",
+            "LZ4_compress_HC_continue",
+            "LZ4_compress_fast",
+            "LZ4_compress_fast_continue",
+            "LZ4_decompress_safe",
+            "LZ4_decompress_safe_continue",
+            "LZ4_decompress_safe_partial",
+            "LZ4_loadDict",
+            "LZ4_loadDictHC",
+            "LZ4_resetStreamHC",
+            "LZ4_setStreamDecode"
+          ],
+          "missing": []
+        },
+        "image_sha256": "580d788c2057a40247bab24b6c5a987f1ae50829c7285d64dfcd24fe2987b3cc",
+        "image_bytes": 39913984,
+        "runtime_acceptance": "not performed",
+        "run_id": "44475571581"
       }
     },
     "opd2404-61118": {
-      "key": "ec6470a1d92f773cd1f8de53be83b55104afa4327a21fb7e4c77d85011dc7c59",
+      "key": "b0e9a0583308e3aeb4071e6deace5613d9aee1c3d56b3924231bc1b667e1cadb",
       "status": "failure",
-      "updated_at": "2026-11-19T06:54:56.633804+00:00",
-      "attempts": 2,
-      "run_id": "44474606564",
+      "updated_at": "2026-11-19T08:17:56.651962+00:00",
+      "attempts": 1,
+      "run_id": "44475571581",
       "release": {
         "repository": "LyraVoid/FinaSU",
         "tag": "v1.6.4",
@@ -159,15 +292,15 @@
       "result": {
         "target": "opd2404-61118",
         "status": "failure",
-        "run_id": "44474606564"
+        "run_id": "44475571581"
       }
     },
     "tb321fu-61124": {
-      "key": "afb4b6c254d15033187d3458fce263ddd63dacdc11509084b9d98c78516414ed",
+      "key": "caedf5730cc34c81cd3e44e71e37486dd9e8940c7d83861a3c05f7ae96dbed88",
       "status": "failure",
-      "updated_at": "2026-11-19T06:54:56.633804+00:00",
-      "attempts": 2,
-      "run_id": "44474606564",
+      "updated_at": "2026-11-19T08:17:56.651962+00:00",
+      "attempts": 1,
+      "run_id": "44475571581",
       "release": {
         "repository": "LyraVoid/FinaSU",
         "tag": "v1.6.4",
@@ -180,16 +313,81 @@
         "published_at": "2026-11-17T13:12:06Z"
       },
       "result": {
+        "target": "tb321fu-61124",
         "status": "failure",
-        "reason": "No successful result receipt"
+        "problems": [
+          "Target ABI mismatch"
+        ],
+        "release": "6.1.124-android14-11-gd53339245194-ab13005711",
+        "kernel_source": "d533392451941315131f1ecddcea958e11ec6b98",
+        "finasu_commit": "ff0e34f1d9d5694ab7b4f1e318a77c781d65cb41",
+        "susfs_commit": "f76b81f2a6bf98e4029cc0c823c054edbec29803",
+        "missing_config": [],
+        "unexpected_config": [],
+        "abi": {
+          "reference_symbols": 8508,
+          "candidate_symbols": 8463,
+          "changed": [],
+          "missing": [
+            "__traceiter_android_rvh_setscheduler_prio",
+            "__traceiter_android_trigger_vendor_lmk_kill",
+            "__traceiter_android_vh_calculate_totalreserve_pages",
+            "__traceiter_android_vh_count_workingset_refault",
+            "__traceiter_android_vh_do_shrink_slab_ex",
+            "__traceiter_android_vh_drain_all_pages_bypass",
+            "__traceiter_android_vh_filemap_add_folio",
+            "__traceiter_android_vh_filemap_map_pages_range",
+            "__traceiter_android_vh_folio_referenced_check_bypass",
+            "__traceiter_android_vh_mem_cgroup_charge",
+            "__traceiter_android_vh_pageset_update",
+            "__traceiter_android_vh_reweight_entity",
+            "__traceiter_android_vh_sched_move_task",
+            "__traceiter_android_vh_shrink_node",
+            "__traceiter_android_vh_vprintk_store",
+            "__tracepoint_android_rvh_setscheduler_prio",
+            "__tracepoint_android_trigger_vendor_lmk_kill",
+            "__tracepoint_android_vh_calculate_totalreserve_pages",
+            "__tracepoint_android_vh_count_workingset_refault",
+            "__tracepoint_android_vh_do_shrink_slab_ex",
+            "__tracepoint_android_vh_drain_all_pages_bypass",
+            "__tracepoint_android_vh_filemap_add_folio",
+            "__tracepoint_android_vh_filemap_map_pages_range",
+            "__tracepoint_android_vh_folio_referenced_check_bypass",
+            "__tracepoint_android_vh_mem_cgroup_charge",
+            "__tracepoint_android_vh_pageset_update",
+            "__tracepoint_android_vh_reweight_entity",
+            "__tracepoint_android_vh_sched_move_task",
+            "__tracepoint_android_vh_shrink_node",
+            "__tracepoint_android_vh_vprintk_store",
+            "__vmap_pages_range_noflush",
+            "cgroup_rm_cftypes",
+            "cpu_cgrp_subsys",
+            "css_task_iter_end",
+            "css_task_iter_next",
+            "css_task_iter_start",
+            "folio_mapcount",
+            "l2tp_session_put",
+            "l2tp_tunnel_put",
+            "mem_cgroup_move_account",
+            "of_update_property",
+            "page_swap_info",
+            "read_swap_cache_async",
+            "unuse_swap_pte",
+            "vmap_pages_range_noflush"
+          ]
+        },
+        "image_sha256": "94eb5e36d39383af161b1a46890169ac04f9183de87bd9d22b4bb42bf51ed852",
+        "image_bytes": 38533632,
+        "runtime_acceptance": "not performed",
+        "run_id": "44475571581"
       }
     },
     "tb710fu-61157": {
-      "key": "b2a08cafab6f705ad89fba28b588a4c22710d139258da030a7ea9cee57eb9673",
+      "key": "1dc25580d078415285f213dae8983b7cf31967bed92e24200af08e2f40eccdd3",
       "status": "failure",
-      "updated_at": "2026-11-19T06:54:56.633804+00:00",
-      "attempts": 2,
-      "run_id": "44474606564",
+      "updated_at": "2026-11-19T08:17:56.651962+00:00",
+      "attempts": 1,
+      "run_id": "44475571581",
       "release": {
         "repository": "LyraVoid/FinaSU",
         "tag": "v1.6.4",
@@ -202,16 +400,17 @@
         "published_at": "2026-11-17T13:12:06Z"
       },
       "result": {
+        "target": "tb710fu-61157",
         "status": "failure",
-        "reason": "No successful result receipt"
+        "run_id": "44475571581"
       }
     },
     "pkg110-61141": {
-      "key": "b060a33b1770548c6cf6aac9cb1ec56c1792f8839985499e2deff5b3e6877ea5",
+      "key": "1f0733ca0a124d8d6261d3aee9845bd9182c8c72f9533647bb030efeeddf54e4",
       "status": "failure",
-      "updated_at": "2026-11-19T06:54:56.633804+00:00",
-      "attempts": 2,
-      "run_id": "44474606564",
+      "updated_at": "2026-11-19T08:17:56.651962+00:00",
+      "attempts": 1,
+      "run_id": "44475571581",
       "release": {
         "repository": "LyraVoid/FinaSU",
         "tag": "v1.6.4",
@@ -224,16 +423,17 @@
         "published_at": "2026-11-17T13:12:06Z"
       },
       "result": {
+        "target": "pkg110-61141",
         "status": "failure",
-        "reason": "No successful result receipt"
+        "run_id": "44475571581"
       }
     },
     "turner-66118-abogki519650608": {
-      "key": "b08ef4a7daaeae4c57c5182dfb5dc552d9ac0acbaf3f7d595125ebea3dd4a35a",
+      "key": "79b7ae6ddeb3cb456512827cd890cf3d5434549589f6cc1f85ae32a4be53e82d",
       "status": "failure",
-      "updated_at": "2026-11-19T06:54:56.633804+00:00",
-      "attempts": 2,
-      "run_id": "44474606564",
+      "updated_at": "2026-11-19T08:17:56.651962+00:00",
+      "attempts": 1,
+      "run_id": "44475571581",
       "release": {
         "repository": "LyraVoid/FinaSU",
         "tag": "v1.6.4",
@@ -246,10 +446,41 @@
         "published_at": "2026-11-17T13:12:06Z"
       },
       "result": {
+        "target": "turner-66118-abogki519650608",
         "status": "failure",
-        "reason": "No successful result receipt"
+        "problems": [
+          "Target ABI mismatch"
+        ],
+        "release": "6.6.118-android15-8-gc44b714366cc-abogki519650608-4k",
+        "kernel_source": "537fe1868bf651d5689d9bccd2db67bbb4cc0a1b",
+        "finasu_commit": "ff0e34f1d9d5694ab7b4f1e318a77c781d65cb41",
+        "susfs_commit": "f98f08223bbf469cc0a1542166383d253557fc32",
+        "missing_config": [],
+        "unexpected_config": [],
+        "abi": {
+          "reference_symbols": 9323,
+          "candidate_symbols": 9323,
+          "changed": [
+            "LZ4_compress_HC",
+            "LZ4_compress_HC_continue",
+            "LZ4_compress_fast",
+            "LZ4_compress_fast_continue",
+            "LZ4_decompress_safe",
+            "LZ4_decompress_safe_continue",
+            "LZ4_decompress_safe_partial",
+            "LZ4_loadDict",
+            "LZ4_loadDictHC",
+            "LZ4_resetStreamHC",
+            "LZ4_setStreamDecode"
+          ],
+          "missing": []
+        },
+        "image_sha256": "c38c1d972ae92792eb6443a47aca0a4e617d3d450c998e79bd0bfedf6b8b92b3",
+        "image_bytes": 39909888,
+        "runtime_acceptance": "not performed",
+        "run_id": "44475571581"
       }
     }
   },
-  "updated_at": "2026-11-19T06:54:56.633804+00:00"
+  "updated_at": "2026-11-19T08:17:56.651962+00:00"
 }
