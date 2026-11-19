@@ -167,7 +167,8 @@
         "vendor": {
           "url": "https://github.com/OnePlusOSS/android_kernel_modules_and_devicetree_oneplus_sm8650.git",
           "commit": "3036f1489a3398bce78c8338ea3a09164297ffcb"
-        }
+        },
+        "compatibility_revision": 1
       },
       "config": "fleet/configs/opd2404-61118.config",
       "config_sha256": "a85101389b7e5950e08de238032a0889b970c8959671b5d616c0141dbb53943a",
@@ -231,7 +232,8 @@
         "vendor": {
           "url": "https://github.com/OnePlusOSS/android_kernel_modules_and_devicetree_oneplus_sm8650.git",
           "commit": "453d8875f815bf9dfad9035982861226a4823a6c"
-        }
+        },
+        "compatibility_revision": 1
       },
       "config": "fleet/configs/pkg110-61141.config",
       "config_sha256": "08391a78b2475b1a2437a31278931f27af0cf03db31b8fd71634253890bddb19",

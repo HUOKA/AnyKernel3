@@ -24,11 +24,22 @@ cp "$DEFCONFIG" "$OUT/.config"
 # otherwise encode the extra annotation and change existing vendor-module CRCs.
 python3 - <<'PY'
 from pathlib import Path
+import re
 p=Path('common/lib/lz4/lz4.h')
 text=p.read_text()
 text=text.replace('#define LZ4LIB_VISIBILITY __attribute__((visibility("default")))',
                   '#define LZ4LIB_VISIBILITY /* kernel EXPORT_SYMBOL owns visibility */')
 p.write_text(text)
+if Path('common/fs/f2fs/lz4armv8/lz4accel.h').exists():
+    names=['lz4_decompress_accel_enable','lz4_decompress_asm','lz4_decompress_asm_fn',
+           '_lz4_decompress_asm','_lz4_decompress_asm_noprfm',
+           '__cfi_lz4_decompress_asm','__cfi_lz4_decompress_asm_noprfm']
+    for file in Path('common/lib/lz4').rglob('*'):
+        if file.suffix not in ['.c','.h','.S']:continue
+        text=file.read_text()
+        for name in names:text=re.sub(r'\b'+re.escape(name)+r'\b','fleet_'+name,text)
+        file.write_text(text)
+    print('Namespaced imported LZ4 acceleration internals alongside OEM F2FS')
 PY
 python3 - "$GITHUB_WORKSPACE" "$KERNEL_ROOT" "$OUT" <<'PY'
 import json, pathlib, re, sys
