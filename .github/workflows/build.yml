@@ -1247,13 +1247,16 @@ jobs:
             exit 1
           }
 
-          echo "升级 LZ4..."
-          rm -f lib/lz4/lz4_compress.c lib/lz4/lz4_decompress.c lib/lz4/lz4defs.h lib/lz4/lz4hc_compress.c
-
-          cp -r $ZZH_PATCHES/zram/lz4/* ./lib/lz4/
-          cp -r $ZZH_PATCHES/zram/include/linux/* ./include/linux/
-          if ! bash $ZZH_PATCHES/zram/apply_lz4_neon.sh; then
-            zram_step_fail "apply_lz4_neon.sh 执行失败"
+          if [ "${FLEET_PRESERVE_LZ4:-false}" = true ]; then
+            echo "保留目标内核的 LZ4 ABI；独立添加 LZ4KD/LZ4K 支持"
+          else
+            echo "升级 LZ4..."
+            rm -f lib/lz4/lz4_compress.c lib/lz4/lz4_decompress.c lib/lz4/lz4defs.h lib/lz4/lz4hc_compress.c
+            cp -r $ZZH_PATCHES/zram/lz4/* ./lib/lz4/
+            cp -r $ZZH_PATCHES/zram/include/linux/* ./include/linux/
+            if ! bash $ZZH_PATCHES/zram/apply_lz4_neon.sh; then
+              zram_step_fail "apply_lz4_neon.sh 执行失败"
+            fi
           fi
 
           if [ -f "fs/f2fs/Makefile" ] && ! grep -qF "f2fs-\$(CONFIG_F2FS_IOSTAT) += iostat.o" "fs/f2fs/Makefile"; then

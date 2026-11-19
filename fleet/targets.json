@@ -55,7 +55,7 @@
         "url": "https://android.googlesource.com/kernel/common",
         "commit": "14220ae4ce65ba58711f65587ef4e93f408892fb",
         "relation": "release-commit",
-        "compatibility_revision": 1
+        "compatibility_revision": 2
       },
       "config": "fleet/configs/gki-6689.config",
       "config_sha256": "6828cedf9426de7654a28b0870a494fd6e1c78701f8d115f86d1cd4e81832675",
@@ -76,7 +76,7 @@
         "url": "https://android.googlesource.com/kernel/common",
         "commit": "3637f4904cf55eb3e7eccb9d747d754a4e199740",
         "relation": "release-commit",
-        "compatibility_revision": 1,
+        "compatibility_revision": 2,
         "patches": [
           {
             "path": "fleet/patches/gki-6692-export-backports.patch",
@@ -104,7 +104,7 @@
         "url": "https://android.googlesource.com/kernel/common",
         "commit": "f7ebe251035c0d15ff90c6a0a320697932785fad",
         "relation": "recorded-source-with-target-abi-check",
-        "compatibility_revision": 1
+        "compatibility_revision": 2
       },
       "config": "fleet/configs/miro-6677.config",
       "config_sha256": "87d37a0036e53c19446ff783dde84277ea76b497b268593138d6945783975444",
@@ -125,7 +125,7 @@
         "url": "https://android.googlesource.com/kernel/common",
         "commit": "2e6b9c3812c54b4704bf9dd557ac29e9d7d4ca4e",
         "relation": "release-commit",
-        "compatibility_revision": 1
+        "compatibility_revision": 2
       },
       "config": "fleet/configs/op615-66118.config",
       "config_sha256": "032ff35b6657c91047c93090a1884993ca622d0720fc2bb772a7ef0558c3fb7e",
@@ -168,7 +168,7 @@
           "url": "https://github.com/OnePlusOSS/android_kernel_modules_and_devicetree_oneplus_sm8650.git",
           "commit": "3036f1489a3398bce78c8338ea3a09164297ffcb"
         },
-        "compatibility_revision": 1
+        "compatibility_revision": 2
       },
       "config": "fleet/configs/opd2404-61118.config",
       "config_sha256": "a85101389b7e5950e08de238032a0889b970c8959671b5d616c0141dbb53943a",
@@ -233,7 +233,7 @@
           "url": "https://github.com/OnePlusOSS/android_kernel_modules_and_devicetree_oneplus_sm8650.git",
           "commit": "453d8875f815bf9dfad9035982861226a4823a6c"
         },
-        "compatibility_revision": 1
+        "compatibility_revision": 2
       },
       "config": "fleet/configs/pkg110-61141.config",
       "config_sha256": "08391a78b2475b1a2437a31278931f27af0cf03db31b8fd71634253890bddb19",
@@ -254,7 +254,7 @@
         "url": "https://github.com/lakitu12/android_kernel_xiaomi_dash.git",
         "commit": "537fe1868bf651d5689d9bccd2db67bbb4cc0a1b",
         "relation": "recorded-vendor-source-with-target-abi-check",
-        "compatibility_revision": 1
+        "compatibility_revision": 2
       },
       "config": "fleet/configs/turner-66118-abogki519650608.config",
       "config_sha256": "b0d736bdabcaee13014e029e167c129e54777f4f4b0b0713dacdb153ffd64d3c",

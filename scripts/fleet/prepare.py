@@ -71,6 +71,7 @@ def main():
     bbg = kernel_root / "Baseband-guard"
     checkout(bbg, "https://github.com/vc-teahouse/Baseband-guard.git", "028ff7fd509e2104596da7cc1ef8e6ce2a0c9082")
     with open(os.environ["GITHUB_ENV"], "a") as stream:
+        stream.write(f"FLEET_PRESERVE_LZ4={'true' if target['series'] == '6.6' or vendor else 'false'}\n")
         stream.write(f"FLEET_BBG_SETUP={bbg / 'setup.sh'}\n")
         stream.write("FLEET_BBG_COMMIT=028ff7fd509e2104596da7cc1ef8e6ce2a0c9082\n")
         stream.write(f"CONFIG={target['id']}\n")
